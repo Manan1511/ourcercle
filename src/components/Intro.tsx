@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { LOGO_TEXT_PATH, LOGO_VIEWBOX } from '../ui/logo-paths'
+import { LOGO_TEXT_PATH } from '../ui/logo-paths'
 
 /**
  * The brand loading sequence, rebuilt from the client's animation.
@@ -46,6 +46,21 @@ const CY = 512.49
 const RADIUS = 415.8
 /** Wordmark height 196.4, plus ~1 unit of margin each side. */
 const STROKE = 198.4
+
+/**
+ * The intro needs its own viewBox, wider than the Logo's.
+ *
+ * Logo renders filled paths that sit exactly inside `0 0 1000 1011.25` (that
+ * box IS their bounding box). The intro instead STROKES a circle, and half the
+ * stroke sits outside the path -- the outer edge reaches radius 515, i.e.
+ * x = -15.2 and y = 1027.5. In the Logo's box SVG clips that flat, which reads
+ * as the ring being sliced off at the sides.
+ *
+ * This box is square and centred on the mark, so the rotation origin is simply
+ * 50% 50% and cannot drift out of sync with the geometry.
+ */
+const HALF = 520
+const VIEWBOX = `${CX - HALF} ${CY - HALF} ${HALF * 2} ${HALF * 2}`
 
 const TOTAL_MS = 3000
 const EXIT_MS = 520
@@ -112,7 +127,7 @@ export default function Intro() {
 
       <svg
         aria-hidden="true"
-        viewBox={LOGO_VIEWBOX}
+        viewBox={VIEWBOX}
         className="relative w-[42vmin] text-(--color-primary)"
       >
         {/* The wordmark sits beneath the arc in the same band; the unwinding
