@@ -1,0 +1,94 @@
+/*
+ * DESIGN TOKENS — generated file, do not edit by hand.
+ * Source of truth: scripts/gen-tokens.py  (run `npm run tokens`)
+ *
+ * Built from the client's approved palette. Brand colours are pinned to
+ * their exact hex; intermediate steps are interpolated in OKLCH because
+ * the supplied palette has no mid-tones of its own.
+ */
+
+@theme {
+  /* --- wine --- */
+  --color-wine-50: #ffeff2;
+  --color-wine-100: #fcdde3;
+  --color-wine-200: #f3c7d0;
+  --color-wine-300: #e6abb8;
+  --color-wine-400: #cf8698;
+  --color-wine-500: #b25d74;
+  --color-wine-600: #8c3a51; /* rose-wine */
+  --color-wine-700: #712a40;
+  --color-wine-800: #5b1e31;
+  --color-wine-900: #471224; /* crimson-hour */
+  --color-wine-950: #330b18;
+  --color-wine-975: #22050e;
+
+  /* --- plum --- */
+  --color-plum-50: #f9eef4;
+  --color-plum-100: #efe0e8;
+  --color-plum-200: #e0cbd6;
+  --color-plum-300: #cdb1c1;
+  --color-plum-400: #b290a3;
+  --color-plum-500: #936b82;
+  --color-plum-600: #734d63;
+  --color-plum-700: #59394c;
+  --color-plum-800: #442939;
+  --color-plum-900: #331628; /* velvet-dusk */
+  --color-plum-950: #20101a;
+  --color-plum-975: #14080f;
+
+  /* --- teal --- */
+  --color-teal-50: #eaf4f4;
+  --color-teal-100: #d9e8e7;
+  --color-teal-200: #c2d8d7;
+  --color-teal-300: #a6c3c1;
+  --color-teal-400: #7ea4a2;
+  --color-teal-500: #558381;
+  --color-teal-600: #366462;
+  --color-teal-700: #27504e;
+  --color-teal-800: #1d3d3c; /* forest-depth */
+  --color-teal-900: #012b2a; /* midnight-moss */
+  --color-teal-950: #071c1c;
+  --color-teal-975: #031111;
+
+  /* --- cream --- */
+  --color-cream-50: #f9f7ef;
+  --color-cream-100: #f7eec7; /* candlelight */
+  --color-cream-200: #e8d4af; /* raw-linen */
+  --color-cream-300: #c7bfa8;
+  --color-cream-400: #aea487;
+  --color-cream-500: #968a68;
+  --color-cream-600: #7c6f4a;
+  --color-cream-700: #635733;
+  --color-cream-800: #4a4022;
+  --color-cream-900: #352d15;
+  --color-cream-950: #251f0b;
+  --color-cream-975: #171205;
+
+  /* --- lilac --- */
+  --color-lilac-50: #f5f0f6;
+  --color-lilac-100: #e5dce6;
+  --color-lilac-200: #d3c5d4; /* dusk-lilac */
+  --color-lilac-300: #bfa8c2; /* pressed-violet */
+  --color-lilac-400: #a491a6;
+  --color-lilac-500: #8c768e;
+  --color-lilac-600: #735d76;
+  --color-lilac-700: #5c485e;
+  --color-lilac-800: #463547;
+  --color-lilac-900: #322533;
+  --color-lilac-950: #221823;
+  --color-lilac-975: #150d16;
+
+  /* --- sage --- */
+  --color-sage-50: #eef4ef;
+  --color-sage-100: #dbe4dd;
+  --color-sage-200: #c4d9ca; /* morning-sage */
+  --color-sage-300: #afbfb4;
+  --color-sage-400: #92a697;
+  --color-sage-500: #768d7d;
+  --color-sage-600: #5b7463;
+  --color-sage-700: #455c4c;
+  --color-sage-800: #324538;
+  --color-sage-900: #213126;
+  --color-sage-950: #152119;
+  --color-sage-975: #0b140e;
+}
