@@ -29,20 +29,23 @@ import { LOGO_TEXT_PATH, LOGO_VIEWBOX } from '../ui/logo-paths'
  */
 
 /**
- * Ring geometry in the logo's 1000-unit viewBox, fitted to the artwork.
+ * Ring geometry in the logo's 1000-unit viewBox.
  *
- * The stroke is sized to the LETTERING, not to the logo's own ring: measured
- * from the artwork the wordmark spans radius 313.7..503.5 (height 189.8) while
- * the ring spans 326.6..504.9 (width 178.3). The letters reach ~13 units
- * further inward, so a ring at its own width leaves their inner tips poking
- * out while it is supposed to be covering them. Matching the strip to the font
- * height makes the overlap exact. The difference is ~1% of the mark's width
- * and is imperceptible in the final lockup.
+ * Sampled from the rendered vector paths themselves (20k points along each),
+ * not from a rasterised approximation -- earlier raster estimates put the
+ * centre and the band several units out, which left letter tips protruding
+ * from the ring that is supposed to be covering them.
+ *
+ * About the fitted centre: the ring spans radius 313.6..507.7 and the wordmark
+ * spans 317.6..514.0. The strip is sized to the TYPE, not to the logo's own
+ * ring, with a hairline margin so anti-aliasing cannot leave a sliver showing.
  */
-const CX = 505
-const CY = 502.2
-const RADIUS = 408.6
-const STROKE = 189.8
+const CX = 499.78
+const CY = 512.49
+/** Centre of the wordmark's radial band: (317.6 + 514.0) / 2. */
+const RADIUS = 415.8
+/** Wordmark height 196.4, plus ~1 unit of margin each side. */
+const STROKE = 198.4
 
 const TOTAL_MS = 3000
 const EXIT_MS = 520
