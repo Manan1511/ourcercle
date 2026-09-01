@@ -5,6 +5,22 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Pre-launch paths, retired when the OurCercle IA landed.
+[[redirects]]
+  from = "/about"
+  to = "/story"
+  status = 301
+
+[[redirects]]
+  from = "/services"
+  to = "/cercles"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/invite"
+  status = 301
+
 # The site is prerendered, so every route already exists as a real HTML file
 # and Netlify serves it directly. This fallback only catches paths with no
 # matching file, handing them to the SPA so the 404 route renders -- with a

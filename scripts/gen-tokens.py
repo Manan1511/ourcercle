@@ -99,6 +99,13 @@ def verify(r):
         ("danger on surface",        r["wine"][300],   r["plum"][900], 4.5),
         ("warning on surface",       r["cream"][200],  r["plum"][900], 4.5),
         ("text on teal section",     r["cream"][100],  r["teal"][900], 7.0),
+        # The cream alternate ground is a LIGHT surface inside a dark system,
+        # so its text roles invert. These pairings are what make tone="alt"
+        # legible; without them the inherited cream text is invisible.
+        ("text on cream alt",        r["wine"][900],   r["cream"][100], 7.0),
+        ("muted text on cream alt",  r["wine"][700],   r["cream"][100], 4.5),
+        ("text on cream alt-raised", r["wine"][900],   r["cream"][200], 7.0),
+        ("accent btn on cream alt",  r["wine"][600],   r["cream"][100], 4.5),
         ("border visible on surface",r["plum"][700],   r["plum"][900], 1.2),
     ]
     ok = True

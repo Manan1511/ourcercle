@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { site } from '../content/site'
-import { Container, Logo } from '../ui'
+import { Button, Container, Logo } from '../ui'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
@@ -11,37 +11,32 @@ export default function Header() {
   useEffect(() => setOpen(false), [pathname])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-(--color-border-subtle) bg-(--color-canvas)/85 backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center gap-2.5"
-          aria-label={`${site.name} — home`}
-        >
+    <header className="sticky top-0 z-50 border-b border-(--color-border-subtle) bg-(--color-canvas)/88 backdrop-blur-md">
+      <Container className="flex h-17 items-center justify-between gap-6">
+        <Link to="/" aria-label={`${site.name}, home`} className="flex items-center">
           {/* The mark includes the "CERCLE" wordmark, so no text label. */}
-          <Logo className="h-8 w-auto" title={site.name} />
+          <Logo className="h-8 w-auto" decorative />
         </Link>
 
-        <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex items-center gap-8">
-            {site.nav.map((link) => (
-              <li key={link.href}>
-                <NavLink
-                  to={link.href}
-                  end={link.href === '/'}
-                  className={({ isActive }) =>
-                    `text-sm transition-colors duration-(--duration-base) hover:text-(--color-text) ${
-                      isActive
-                        ? 'text-(--color-text) font-medium'
-                        : 'text-(--color-text-muted)'
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+        <nav aria-label="Main" className="hidden items-center gap-7 md:flex">
+          {site.nav.map((link) => (
+            <NavLink
+              key={link.href}
+              to={link.href}
+              className={({ isActive }) =>
+                `text-sm transition-colors duration-(--duration-base) hover:text-(--color-text) ${
+                  isActive
+                    ? 'font-semibold text-(--color-text)'
+                    : 'text-(--color-text-muted)'
+                }`
+              }
+            >
+              {link.label}
+            </NavLink>
+          ))}
+          <Button to={site.cta.href} variant="outline" size="sm">
+            {site.cta.label}
+          </Button>
         </nav>
 
         <button
@@ -77,20 +72,24 @@ export default function Header() {
           aria-label="Main"
           className="border-t border-(--color-border-subtle) bg-(--color-canvas) md:hidden"
         >
-          <Container>
-            <ul className="flex flex-col py-2">
-              {site.nav.map((link) => (
-                <li key={link.href}>
-                  <NavLink
-                    to={link.href}
-                    end={link.href === '/'}
-                    className="block py-3 text-sm text-(--color-text-muted)"
-                  >
-                    {link.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+          <Container className="flex flex-col gap-1 py-4">
+            {site.nav.map((link) => (
+              <NavLink
+                key={link.href}
+                to={link.href}
+                className="py-2.5 text-sm text-(--color-text-muted)"
+              >
+                {link.label}
+              </NavLink>
+            ))}
+            <Button
+              to={site.cta.href}
+              variant="outline"
+              size="sm"
+              className="mt-3 self-start"
+            >
+              {site.cta.label}
+            </Button>
           </Container>
         </nav>
       )}

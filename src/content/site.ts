@@ -12,7 +12,7 @@ export interface NavLink {
 }
 
 export interface SiteConfig {
-  /** Brand name, used in the header and in <title> suffixes. */
+  /** Brand name, used in <title> suffixes and aria labels. */
   name: string
   /** Fallback <title> for pages that don't set their own. */
   defaultTitle: string
@@ -22,22 +22,37 @@ export interface SiteConfig {
   url: string
   /** Path to the default social share image, relative to /public. */
   ogImage: string
+  /** One-line positioning, used in the footer. */
+  tagline: string
   nav: NavLink[]
+  /** The single conversion path -- there is no open signup. */
+  cta: NavLink
+  contact: {
+    /* TODO: client to confirm -- placeholder address. */
+    email: string
+    /* TODO: client to confirm -- placeholder handle. */
+    instagram: string
+  }
 }
 
 export const site: SiteConfig = {
-  name: 'Cercle',
-  defaultTitle: 'Cercle',
+  name: 'OurCercle',
+  defaultTitle: 'OurCercle — curated experiences, real human connection',
   defaultDescription:
-    'Placeholder description. Replace with the client-approved copy before launch -- this is what shows up under the link in Google results.',
+    'OurCercle is a social experiences community built around real human connection — thoughtfully curated gatherings that bring together people, perspectives and stories.',
   // TODO: set to the real domain before launch. Wrong value here means broken
   // canonical URLs and social previews that point at the wrong site.
   url: 'https://example.com',
   ogImage: '/og-default.png',
+  tagline: 'Thoughtfully curated experiences for real human connection.',
   nav: [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'The Cercles', href: '/cercles' },
+    { label: 'Journal', href: '/journal' },
+    { label: 'Our story', href: '/story' },
   ],
+  cta: { label: 'Request an invite', href: '/invite' },
+  contact: {
+    email: 'hello@ourcercle.com',
+    instagram: 'https://instagram.com/ourcercle',
+  },
 }

@@ -22,8 +22,12 @@
   --color-canvas: var(--color-plum-975);
   --color-surface: var(--color-plum-900);
   --color-surface-raised: var(--color-wine-900);
-  --color-surface-alt: var(--color-teal-900);
-  --color-surface-alt-raised: var(--color-teal-800);
+  /* The alternate ground is cream, not teal (client direction, 2026-09-01).
+     It is a LIGHT ground in an otherwise dark system, so content inside a
+     tone="alt" section must switch to the on-alt text roles below -- the
+     inherited cream body text is invisible on cream. */
+  --color-surface-alt: var(--color-cream-100);
+  --color-surface-alt-raised: var(--color-cream-200);
 
   /* Lines */
   --color-border: var(--color-plum-700);
@@ -35,6 +39,9 @@
   --color-text-muted: var(--color-lilac-300);
   --color-text-subtle: var(--color-lilac-500);
   --color-text-inverse: var(--color-wine-900);
+  /* Text on the cream alternate ground. */
+  --color-text-on-alt: var(--color-wine-900);
+  --color-text-on-alt-muted: var(--color-wine-700);
 
   /* Interactive */
   --color-primary: var(--color-cream-100);

@@ -10,9 +10,12 @@ import Seo from './Seo'
 export default function PageShell({
   content,
   path,
+  noIndex = false,
 }: {
   content: PageContent
   path: string
+  /** Keep unfinished pages out of the search index. */
+  noIndex?: boolean
 }) {
   return (
     <>
@@ -20,6 +23,7 @@ export default function PageShell({
         title={content.meta.title}
         description={content.meta.description}
         absoluteTitle={content.meta.absoluteTitle}
+        noIndex={noIndex}
         path={path}
       />
 

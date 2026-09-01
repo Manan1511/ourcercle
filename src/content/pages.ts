@@ -1,6 +1,8 @@
 /**
- * Per-page copy. Placeholder text throughout -- replace once the client's
- * final wording is signed off.
+ * Per-page copy for pages that don't yet have their own designed
+ * implementation. Journal lives in journal.ts.
+ *
+ * DRAFT: client must approve all wording.
  */
 
 export interface PageMeta {
@@ -29,68 +31,67 @@ export interface PageContent {
 export const home: PageContent = {
   meta: {
     // Home owns its whole title -- appending the brand would repeat it.
-    title: 'Cercle',
+    title: 'OurCercle — curated experiences, real human connection',
     absoluteTitle: true,
     description:
-      'Placeholder home page description for search results and social previews.',
+      'A social experiences community built around real human connection. Thoughtfully curated gatherings that bring together people, perspectives and stories.',
   },
   hero: {
-    eyebrow: 'Placeholder eyebrow',
-    heading: 'Headline goes here',
-    body: 'Supporting paragraph. This copy is a placeholder and should be replaced with the client-approved wording.',
-    cta: { label: 'Get in touch', href: '/contact' },
+    eyebrow: 'A social experiences community',
+    heading: 'Step outside your usual circle.',
+    body: 'We create thoughtfully curated experiences that bring together people, perspectives and stories — from intimate Chef’s Tables to art, beauty and culture. Every Cercle is designed to put you in a room of people you may never have met otherwise.',
+    cta: { label: 'Request an invite', href: '/invite' },
   },
   sections: [
     {
-      heading: 'Section one',
-      body: 'Placeholder body copy for the first content section.',
+      heading: 'Meaningful experiences',
+      body: 'Every gathering is designed around a room, a table and a reason to be there.',
     },
     {
-      heading: 'Section two',
-      body: 'Placeholder body copy for the second content section.',
+      heading: 'Meaningful conversations',
+      body: 'Small enough that nobody is a bystander, considered enough that nobody is networking.',
     },
   ],
 }
 
-export const about: PageContent = {
-  meta: {
-    title: 'About',
-    description: 'Placeholder about page description.',
+/** Routes designed but not yet implemented. Rendered noindex until they are. */
+export const upcoming: Record<string, PageContent> = {
+  cercles: {
+    meta: {
+      title: 'The Cercles',
+      description: 'The formats we gather around.',
+    },
+    hero: {
+      eyebrow: 'The Cercles',
+      heading: 'The formats we gather around.',
+      body: 'This page is being built. In the meantime, request an invite and we will be in touch about the next gathering.',
+      cta: { label: 'Request an invite', href: '/invite' },
+    },
+    sections: [],
   },
-  hero: {
-    heading: 'About us',
-    body: 'Placeholder introduction to the company and what it does.',
+  story: {
+    meta: {
+      title: 'Our story',
+      description: 'Why OurCercle exists.',
+    },
+    hero: {
+      eyebrow: 'Our story',
+      heading: 'Why we started setting the table.',
+      body: 'This page is being built. In the meantime, request an invite and we will be in touch about the next gathering.',
+      cta: { label: 'Request an invite', href: '/invite' },
+    },
+    sections: [],
   },
-  sections: [
-    { heading: 'Our story', body: 'Placeholder story copy.' },
-    { heading: 'Our approach', body: 'Placeholder approach copy.' },
-  ],
-}
-
-export const services: PageContent = {
-  meta: {
-    title: 'Services',
-    description: 'Placeholder services page description.',
+  invite: {
+    meta: {
+      title: 'Request an invite',
+      description: 'Request an invite to an upcoming Cercle.',
+    },
+    hero: {
+      eyebrow: 'Request an invite',
+      heading: 'Tell us a little about you.',
+      body: 'The invite form is being built. Until it lands, write to hello@ourcercle.com and we will take it from there.',
+    },
+    sections: [],
   },
-  hero: {
-    heading: 'What we do',
-    body: 'Placeholder overview of the services offered.',
-  },
-  sections: [
-    { heading: 'Service one', body: 'Placeholder service description.' },
-    { heading: 'Service two', body: 'Placeholder service description.' },
-    { heading: 'Service three', body: 'Placeholder service description.' },
-  ],
-}
-
-export const contact: PageContent = {
-  meta: {
-    title: 'Contact',
-    description: 'Placeholder contact page description.',
-  },
-  hero: {
-    heading: 'Get in touch',
-    body: 'Placeholder contact copy. No form is wired up yet -- see the README.',
-  },
-  sections: [],
 }
