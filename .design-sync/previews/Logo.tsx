@@ -1,24 +1,18 @@
 import { Logo } from 'ourcercle'
 
 export const Sizes = () => (
-  <div className="flex items-end gap-6 p-6">
-    <Logo className="h-6 w-6" />
-    <Logo className="h-10 w-10" />
-    <Logo className="h-16 w-16" />
+  <div className="flex items-end gap-8 p-6">
+    <Logo className="h-8 w-auto" />
+    <Logo className="h-14 w-auto" />
+    <Logo className="h-20 w-auto" />
   </div>
 )
 
-export const WithWordmark = () => (
-  <div className="flex items-center gap-3 p-6">
-    <Logo className="h-8 w-8" />
-    <span className="font-(family-name:--font-display) text-sm font-semibold uppercase tracking-[0.2em]">
-      Cercle
-    </span>
-  </div>
-)
-
-export const Muted = () => (
-  <div className="p-6">
-    <Logo className="h-10 w-10 text-(--color-text-muted)" />
+export const Colourways = () => (
+  <div className="flex flex-wrap items-center gap-8 p-6">
+    <Logo className="h-14 w-auto text-(--color-primary)" />
+    <Logo className="h-14 w-auto text-(--color-accent)" />
+    <Logo className="h-14 w-auto text-(--color-success)" />
+    <Logo className="h-14 w-auto text-(--color-text-muted)" />
   </div>
 )

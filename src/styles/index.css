@@ -2,6 +2,7 @@
  * The page paint lives here rather than in ds.css so that designs built with
  * the library aren't forced onto a dark background they didn't ask for. */
 @import './ds.css';
+@import './fonts.css';
 
 @layer base {
   html {

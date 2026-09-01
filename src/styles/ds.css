@@ -51,21 +51,16 @@
   --color-warning: var(--color-cream-200);
   --color-danger: var(--color-wine-300);
 
-  /* Typography
-     Inter for body/UI -- legible at small sizes, safe fallback stack.
-     Fraunces for headings -- a characterful serif that contrasts with the
-     logo's tight geometric lettering rather than competing with it; its
-     optical-size axis makes it more expressive at hero sizes automatically.
-     TODO: swap for licensed brand faces if/when the client specifies any. */
-  --font-sans:
-    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-    sans-serif;
-  --font-display: 'Fraunces Variable', ui-serif, Georgia, 'Times New Roman', serif;
+  /* Typography -- the client's brand faces.
+     Manrope carries body and UI; Instrument Serif carries display headings.
+     Instrument Serif has one weight (400) and no bold cut. */
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
 
-  --text-display: 4rem;
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.01em;
-  --text-display--font-weight: 500;
+  --text-display: 4.5rem;
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.015em;
+  --text-display--font-weight: 400;
 
   /* Layout */
   --container-content: 72rem;
@@ -100,9 +95,17 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    /* Fraunces reads cramped under the tight tracking a grotesque sans wants. */
-    letter-spacing: -0.01em;
+    /* Instrument Serif is a display serif: it sets tight and needs no extra
+       negative tracking beyond a hair at large sizes. */
+    font-weight: 400;
+    letter-spacing: -0.005em;
     text-wrap: balance;
+  }
+
+  /* The display face has a single weight. Refuse synthetic bold/italic so a
+     wrong weight shows up as a design bug rather than smeared letterforms. */
+  html {
+    font-synthesis-weight: none;
   }
 
   p {

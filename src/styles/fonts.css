@@ -1,0 +1,31 @@
+/* Brand faces, self-hosted from the client's supplied files.
+ *
+ * Manrope is variable (weight 200-800), so any weight in that range is real.
+ * Instrument Serif ships a SINGLE weight (400) plus an italic -- there is no
+ * bold cut. Never ask for a heavier weight on the display face: the browser
+ * would synthesise it, which smears the letterforms. `font-synthesis` is
+ * disabled in ds.css to make that failure visible rather than silent. */
+
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url('./fonts/manrope-variable.woff2') format('woff2-variations');
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('./fonts/instrument-serif-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url('./fonts/instrument-serif-italic.woff2') format('woff2');
+}

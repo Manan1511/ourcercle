@@ -29,6 +29,10 @@ export default defineConfig({
     outDir: 'dist-ds',
     emptyOutDir: true,
     cssCodeSplit: false,
+    // Library mode inlines CSS-referenced assets by default, which would embed
+    // ~110KB of base64 fonts into the stylesheet and duplicate the font files
+    // the sync copies separately. Force real files.
+    assetsInlineLimit: 0,
     lib: {
       entry: resolve(import.meta.dirname, 'src/ui/lib-entry.ts'),
       formats: ['es'],
@@ -36,7 +40,16 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
-      output: { assetFileNames: 'cercle.css' },
+      output: {
+        // Only the stylesheet gets the fixed name. Naming every asset
+        // 'cercle.css' collides, and Vite falls back to inlining the fonts as
+        // base64 -- which bloats the sheet and duplicates the files the sync
+        // already copies from src/styles/fonts.css.
+        assetFileNames: (info) =>
+          info.names?.some((n) => n.endsWith('.css'))
+            ? 'cercle.css'
+            : 'fonts/[name][extname]',
+      },
     },
   },
 })

@@ -38,7 +38,7 @@ token below is verified present.
 | Lines | `--color-border`, `--color-border-subtle`, `--color-border-strong` |
 | Actions | `--color-primary` + `--color-on-primary`, `--color-accent` + `--color-on-accent`, `--color-primary-hover`, `--color-accent-hover`, `--color-link` |
 | Status | `--color-success`, `--color-warning`, `--color-danger`, `--color-focus` |
-| Type | `--font-sans` (Inter, body), `--font-display` (Fraunces, headings), `--text-display` |
+| Type | `--font-sans` (Manrope, body/UI), `--font-display` (Instrument Serif, headings), `--text-display` |
 | Layout | `--container-content`, `--container-prose`, `--spacing-section`, `--spacing-section-lg`, `--radius-card`, `--radius-control`, `--shadow-card` |
 | Motion | `--duration-base`, `--ease-out-soft` |
 
@@ -48,7 +48,23 @@ Pair `--color-primary` only with `--color-on-primary` (and accent with
 **Wine leads, teal supports.** Use `--color-surface-alt` / `-alt-raised` for
 alternating section grounds to give a long page rhythm — not as a second accent.
 
-## 3. Compose with the library, not with raw elements
+## 3. The display face has one weight
+
+`--font-display` is **Instrument Serif, weight 400 only** — there is no bold cut.
+`font-synthesis-weight` is disabled, so asking a heading for a heavier weight
+gets you nothing rather than a smeared fake bold. **Build heading hierarchy from
+size, never weight** (`Heading` already does this). `--font-sans` is Manrope and
+is genuinely variable (200–800), so weight is free on body and UI text.
+
+## 4. `Logo` paints with `currentColor`
+
+One vector, every colourway — set the colour on the element rather than looking
+for per-colour assets: `<Logo className="h-8 w-auto text-(--color-accent)" />`.
+The mark **already contains the "CERCLE" wordmark**, so don't put a text label
+next to it. It is slightly taller than wide: constrain one axis (`h-8 w-auto`)
+rather than forcing a square.
+
+## 5. Compose with the library, not with raw elements
 
 `Section` (page band, `tone` + `size`) wraps `Container` (`content` | `prose`
 width) — that pairing is the standard page scaffold. Use `Heading` with an
@@ -56,13 +72,13 @@ explicit `level` for document structure and `size` for appearance; they are
 independent. Long-form copy goes in `Prose`, which styles its descendants, so
 write plain `<h2>/<p>/<ul>` inside it rather than per-element classes.
 
-## 4. Where the truth lives
+## 6. Where the truth lives
 
 Read `styles.css` and its `@import` closure (it pulls in `_ds_bundle.css`, which
 holds every token definition and component style) before styling anything. Each
 component's real API is in its `<Name>.d.ts`, and usage in `<Name>.prompt.md`.
 
-## 5. Idiomatic example
+## 7. Idiomatic example
 
 ```jsx
 <DesignSystemProvider>

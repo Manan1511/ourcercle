@@ -18,10 +18,8 @@ export default function Header() {
           className="flex items-center gap-2.5"
           aria-label={`${site.name} — home`}
         >
-          <Logo className="h-7 w-7" />
-          <span className="font-(family-name:--font-display) text-sm font-semibold uppercase tracking-[0.2em]">
-            {site.name}
-          </span>
+          {/* The mark includes the "CERCLE" wordmark, so no text label. */}
+          <Logo className="h-8 w-auto" title={site.name} />
         </Link>
 
         <nav aria-label="Main" className="hidden md:block">

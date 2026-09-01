@@ -35,6 +35,29 @@ is wired as `cfg.provider`. It is excluded from the component list via
 `componentSrcMap: {"DesignSystemProvider": null}` — it still ships in the
 bundle, it just doesn't get a card of its own.
 
+## Brand assets
+
+Source kit: `C:\Users\manan\Downloads\Personal\ourcercle` (fonts, palettes, logo
+artboards). Not in the repo -- keep a copy if that folder may move.
+
+- **Fonts** are the client's own, self-hosted: Manrope (variable, 200-800) for
+  body/UI and Instrument Serif for display. Converted TTF->WOFF2 with fonttools
+  into `src/styles/fonts/`. **Instrument Serif has one weight (400) and no bold
+  cut**, so `font-synthesis-weight: none` is set in ds.css and `Heading` uses
+  `font-normal` at every size. Do not reintroduce bold headings.
+- **@font-face lives in `src/styles/fonts.css`, NOT in ds.css.** Vite's library
+  mode inlines CSS-referenced assets and ignores `assetsInlineLimit`, so
+  importing fonts.css from ds.css embedded ~110KB of base64 into cercle.css
+  (171KB -> 25KB once separated). The site imports fonts.css directly; the sync
+  ships the real .woff2 via `cfg.extraFonts`. Keep them separate.
+- **The logo is vector-traced** from `LOGO without bg/Artboard 14.png` using
+  `potracer` (pip). Two gotchas: potracer treats the FALSE region as ink, so the
+  alpha mask is inverted before tracing; and the bitmap is padded so ink never
+  touches the border, or the fill inverts. The mark paints with `currentColor`,
+  so one vector covers all 12 supplied colourways.
+- **The mark contains the "CERCLE" wordmark**, so header and footer show the
+  logo alone with no adjacent text label.
+
 ## Tailwind tree-shakes unused theme vars
 
 Only tokens actually referenced by components survive into `_ds_bundle.css`.
@@ -64,19 +87,20 @@ None outstanding. The final validate run exits 0 with zero warnings.
 
 ## Re-sync risks
 
-- **Upload never happened on the first run.** `DesignSync` had no design-system
-  authorization in that session (non-interactive, so `/design-login` was
-  unavailable), so there is no `projectId` in the config and **no remote anchor
-  exists**. The next sync is a first-time import: expect full verification and a
-  new project. Grades in `.design-sync/.cache/` are gitignored and will not
-  carry across machines.
+- **The remote anchor is current** (project `ce4c6446-...`, pinned in config).
+  Fetch it to `.design-sync/.cache/remote-sync.json` and pass `--remote` so the
+  next sync diffs instead of re-verifying everything. Grades in
+  `.design-sync/.cache/` are gitignored and do not carry across machines.
+- **Renaming font files orphans the old ones remotely.** The brand-font switch
+  left 10 Inter/Fraunces `.woff2` behind that had to be deleted explicitly; an
+  anchored re-sync derives this automatically via `upload.deletePaths`.
 - **Preview copy is invented brand voice**, not client-approved. It reads as
   real product copy ("The Atelier Coat", "A quieter kind of luxury"). If the
   client's actual positioning differs, the previews should be re-authored — the
   design agent imitates this copy.
-- **The logo is a placeholder** traced from the loading animation. When the real
-  vector lands, `src/ui/Logo.tsx` changes and Logo's grades should be recaptured.
-- **Fonts come from `node_modules`** via `extraFonts` (@fontsource Inter +
-  Fraunces). A dependency bump changes the harvested files.
+- **Only a PNG logo was supplied, no vector.** The shipped path is a trace; if
+  real vector artwork arrives, replace `src/ui/Logo.tsx` and recapture grades.
+- **Fonts are committed to the repo** (`src/styles/fonts/`), so they no longer
+  move with a dependency bump. OFL licences are in the client's source kit.
 - **React Router is pinned to v6** by `vite-react-ssg`; a future upgrade changes
   what `Button`'s `to` branch bundles.
