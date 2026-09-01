@@ -68,10 +68,18 @@ const EXIT_MS = 520
 /** Matches the failsafe in index.html that un-hides the page. */
 const clearPending = () => document.documentElement.removeAttribute('data-intro')
 
+/**
+ * Module scope, deliberately: this survives client-side navigation but resets
+ * on a real page load. Clicking the logo to come back to the homepage remounts
+ * this component, and without the guard that would replay the whole sequence
+ * mid-session -- which is not a first impression, just an obstacle.
+ */
+let hasPlayed = false
+
 export default function Intro() {
   const [mounted, setMounted] = useState(false)
   const [leaving, setLeaving] = useState(false)
-  const [gone, setGone] = useState(false)
+  const [gone, setGone] = useState(() => hasPlayed)
   const skipRef = useRef<HTMLButtonElement>(null)
 
   const dismiss = useCallback(() => {
@@ -81,6 +89,14 @@ export default function Intro() {
   }, [])
 
   useEffect(() => {
+    // Already shown during this page load -- navigating back must not replay it.
+    if (hasPlayed) {
+      clearPending()
+      setGone(true)
+      return
+    }
+    hasPlayed = true
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       // Motion-sensitive visitors get the site, not a wall.
       clearPending()
