@@ -11,12 +11,25 @@ export type SectionTone = 'canvas' | 'surface' | 'raised' | 'alt' | 'alt-raised'
  * renders invisible on cream. Anything nested that sets its own colour should
  * use the --color-text-on-alt* roles.
  */
+/**
+ * Inside a cream ground, rebind the text roles rather than only setting a
+ * colour. Components style themselves with --color-text-muted / -subtle /
+ * -link; left alone those are pale lilacs that vanish on cream. Rebinding
+ * means any composed content adapts without knowing it is on a light ground.
+ */
+const ON_ALT = [
+  'text-(--color-text-on-alt)',
+  '[--color-text-muted:var(--color-text-on-alt-muted)]',
+  '[--color-text-subtle:var(--color-text-on-alt-subtle)]',
+  '[--color-link:var(--color-text-on-alt)]',
+].join(' ')
+
 const tones: Record<SectionTone, string> = {
   canvas: 'bg-(--color-canvas)',
   surface: 'bg-(--color-surface)',
   raised: 'bg-(--color-surface-raised)',
-  alt: 'bg-(--color-surface-alt) text-(--color-text-on-alt)',
-  'alt-raised': 'bg-(--color-surface-alt-raised) text-(--color-text-on-alt)',
+  alt: `bg-(--color-surface-alt) ${ON_ALT}`,
+  'alt-raised': `bg-(--color-surface-alt-raised) ${ON_ALT}`,
 }
 
 export default function Section({

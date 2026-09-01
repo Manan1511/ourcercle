@@ -42,6 +42,7 @@
   /* Text on the cream alternate ground. */
   --color-text-on-alt: var(--color-wine-900);
   --color-text-on-alt-muted: var(--color-wine-700);
+  --color-text-on-alt-subtle: var(--color-wine-600);
 
   /* Interactive */
   --color-primary: var(--color-cream-100);

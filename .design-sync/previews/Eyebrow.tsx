@@ -1,8 +1,10 @@
 import { Eyebrow, Heading } from 'ourcercle'
 
-export const Default = () => <div className="p-6">
+export const Default = () => (
+  <div className="p-6">
     <Eyebrow>Est. 2024</Eyebrow>
   </div>
+)
 
 export const AboveHeading = () => (
   <div className="p-6">

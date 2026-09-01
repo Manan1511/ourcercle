@@ -7,8 +7,7 @@ export const Tones = () => (
         Raised
       </Heading>
       <p className="mt-2 text-(--color-text-muted)">
-        Sits on the crimson ground. The default for content that should lift off
-        the page.
+        Sits on the crimson ground. The default for content that should lift off the page.
       </p>
     </Card>
     <Card tone="surface">
@@ -16,8 +15,7 @@ export const Tones = () => (
         Surface
       </Heading>
       <p className="mt-2 text-(--color-text-muted)">
-        The quieter plum ground, for cards that sit inside an already-raised
-        section.
+        The quieter plum ground, for cards that sit inside an already-raised section.
       </p>
     </Card>
   </div>

@@ -106,6 +106,8 @@ def verify(r):
         ("muted text on cream alt",  r["wine"][700],   r["cream"][100], 4.5),
         ("text on cream alt-raised", r["wine"][900],   r["cream"][200], 7.0),
         ("accent btn on cream alt",  r["wine"][600],   r["cream"][100], 4.5),
+        ("subtle text on cream alt", r["wine"][600],   r["cream"][100], 4.5),
+        ("subtle on cream raised",   r["wine"][600],   r["cream"][200], 4.5),
         ("border visible on surface",r["plum"][700],   r["plum"][900], 1.2),
     ]
     ok = True
