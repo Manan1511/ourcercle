@@ -64,7 +64,7 @@
     /* The intro's viewBox is square and centred on the mark, so the rotation
        origin is its centre -- no coordinates to keep in sync. */
     transform-origin: 50% 50%;
-    animation: intro-arc 3000ms cubic-bezier(0.65, 0, 0.35, 1) both;
+    animation: intro-arc 3000ms linear both;
   }
 
   .intro-text {
@@ -83,28 +83,45 @@
     }
   }
 
+  /* Per-segment easing, measured from the source rather than assumed. A single
+     ease-in-out across the whole timeline made the regrow whip through the
+     middle and slam to a stop -- the source does not do that. */
   @keyframes intro-arc {
-    /* draw clockwise from the 36deg anchor to a closed ring */
+    /* Draw clockwise from the 36deg anchor. The curve is fitted to the source,
+       which is 46% drawn at 24% of the beat, 80% at 48% and 94% at 76%
+       (RMSE 0.015) -- a gentler ease-out than any of the stock ones. */
     0% {
       stroke-dasharray: 0 360;
       transform: rotate(36deg);
+      animation-timing-function: cubic-bezier(0.26, 0.5, 0.44, 1);
+    }
+    /* Closed ring (source: 1.8s of 10s), held briefly. */
+    18% {
+      stroke-dasharray: 360 360;
+      transform: rotate(36deg);
+      animation-timing-function: linear;
     }
     22% {
       stroke-dasharray: 360 360;
       transform: rotate(36deg);
+      animation-timing-function: linear;
     }
-    /* unwind from the same anchor, uncovering the wordmark */
+    /* Unwind from the same anchor, uncovering the wordmark. */
     50% {
       stroke-dasharray: 0 360;
       transform: rotate(36deg);
+      animation-timing-function: linear;
     }
-    /* the anchor swaps to the far end while the arc has no length (invisible) */
+    /* The anchor swaps to the far end while the arc has no length (invisible). */
     58% {
       stroke-dasharray: 0 360;
       transform: rotate(231.5deg);
+      animation-timing-function: linear;
     }
-    /* redraw anticlockwise into the logo's real lockup: 231.5 - 199.5 = 32 */
-    74% {
+    /* Redraw anticlockwise into the logo's real lockup: 231.5 - 199.5 = 32.
+       The source grows this LINEARLY (normalised 0.25->0.24, 0.50->0.51,
+       1.00->0.99) over 1.4s, i.e. 58% to 72% of the timeline. */
+    72% {
       stroke-dasharray: 199.5 360;
       transform: rotate(32deg);
     }
@@ -114,7 +131,6 @@
     }
   }
 
-  /* The wordmark is under the ring, so it can appear while fully covered. */
   @keyframes intro-text {
     0% {
       opacity: 0;
