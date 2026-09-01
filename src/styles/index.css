@@ -282,3 +282,54 @@
     }
   }
 }
+
+/* Mobile menu: opens by growing to its own height rather than appearing.
+   The 0fr -> 1fr grid row animates to the content's natural height, so there
+   is no hard-coded max-height to drift out of date as the nav gains links. */
+@layer components {
+  .mobile-nav {
+    display: grid;
+    grid-template-rows: 0fr;
+    border-top: 1px solid transparent;
+    transition:
+      grid-template-rows 340ms var(--ease-out-soft),
+      border-color 340ms var(--ease-out-soft);
+  }
+
+  .mobile-nav[data-open] {
+    grid-template-rows: 1fr;
+    border-top-color: var(--color-border-subtle);
+  }
+
+  /* min-height:0 lets the grid row actually collapse to nothing. */
+  .mobile-nav-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* The items settle in just behind the panel, staggered down the list. */
+  .mobile-nav-inner a {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 260ms var(--ease-out-soft),
+      transform 260ms var(--ease-out-soft);
+  }
+
+  .mobile-nav[data-open] .mobile-nav-inner a {
+    opacity: 1;
+    transform: none;
+    transition-delay: var(--stagger, 0ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-nav,
+    .mobile-nav-inner a {
+      transition: none;
+    }
+    .mobile-nav-inner a {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

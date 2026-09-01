@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { site } from '../content/site'
 import { Button, Container, Logo } from '../ui'
@@ -71,18 +71,24 @@ export default function Header() {
         </button>
       </Container>
 
-      {open && (
-        <nav
-          id="mobile-nav"
-          aria-label="Main"
-          className="border-t border-(--color-border-subtle) bg-(--color-canvas) md:hidden"
-        >
+      {/* Always rendered so it can animate open and closed. `inert` when shut
+          keeps its links out of the tab order and out of the accessibility
+          tree, which conditional rendering used to handle. */}
+      <nav
+        id="mobile-nav"
+        aria-label="Main"
+        data-open={open || undefined}
+        inert={!open}
+        className="mobile-nav bg-(--color-canvas) md:hidden"
+      >
+        <div className="mobile-nav-inner">
           <Container className="flex flex-col gap-1 py-4">
-            {site.nav.map((link) => (
+            {site.nav.map((link, i) => (
               <NavLink
                 key={link.href}
                 to={link.href}
-                className="py-2.5 text-sm text-(--color-text-muted)"
+                style={{ '--stagger': `${60 + i * 45}ms` } as CSSProperties}
+                className="py-2.5 text-sm text-(--color-text-muted) transition-colors hover:text-(--color-text)"
               >
                 {link.label}
               </NavLink>
@@ -92,12 +98,13 @@ export default function Header() {
               variant="outline"
               size="sm"
               className="mt-3 self-start"
+              style={{ '--stagger': `${60 + site.nav.length * 45}ms` } as CSSProperties}
             >
               {site.cta.label}
             </Button>
           </Container>
-        </nav>
-      )}
+        </div>
+      </nav>
     </header>
   )
 }
