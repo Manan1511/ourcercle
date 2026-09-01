@@ -18,3 +18,126 @@
     color: var(--color-text);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   INTRO SEQUENCE
+   Site-only (not part of the design system). Reproduces the beats of the
+   client's loading animation from the logo's own vector paths.
+   Timeline over 3s: 0-33% resolve, 33-60% recede and the ring dissolves,
+   60-87% rebuild, 87-100% hold.
+   --------------------------------------------------------------------------- */
+@layer components {
+  .intro {
+    opacity: 1;
+    transition: opacity 520ms var(--ease-out-soft);
+  }
+
+  .intro[data-leaving] {
+    opacity: 0;
+  }
+
+  /* The warm spotlight, low and to the left, as in the original. */
+  .intro-glow {
+    background: radial-gradient(
+      120% 90% at 22% 88%,
+      var(--color-wine-700) 0%,
+      var(--color-wine-900) 38%,
+      var(--color-canvas) 78%
+    );
+    animation: intro-glow 3000ms var(--ease-out-soft) both;
+  }
+
+  .intro-scale {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: intro-scale 3000ms var(--ease-out-soft) both;
+  }
+
+  .intro-ring {
+    animation: intro-ring 3000ms var(--ease-out-soft) both;
+  }
+
+  .intro-text {
+    animation: intro-text 3000ms var(--ease-out-soft) both;
+  }
+
+  @keyframes intro-glow {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Scale up, recede, then settle into the lockup. */
+  @keyframes intro-scale {
+    0% {
+      transform: scale(0.52);
+    }
+    33% {
+      transform: scale(1);
+    }
+    60% {
+      transform: scale(0.74);
+    }
+    87% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* The ring dissolves in the middle beat and rebuilds. */
+  @keyframes intro-ring {
+    0% {
+      opacity: 0;
+    }
+    28% {
+      opacity: 1;
+    }
+    52% {
+      opacity: 0;
+    }
+    64% {
+      opacity: 0;
+    }
+    87% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* The wordmark arrives just after the ring and stays throughout. */
+  @keyframes intro-text {
+    0% {
+      opacity: 0;
+    }
+    12% {
+      opacity: 0;
+    }
+    33% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Motion-sensitive visitors never see this component at all (it returns
+     null), but belt and braces if the query flips mid-session. */
+  @media (prefers-reduced-motion: reduce) {
+    .intro-glow,
+    .intro-scale,
+    .intro-ring,
+    .intro-text {
+      animation: none;
+    }
+  }
+}
