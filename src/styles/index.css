@@ -64,6 +64,8 @@
     /* The intro's viewBox is square and centred on the mark, so the rotation
        origin is its centre -- no coordinates to keep in sync. */
     transform-origin: 50% 50%;
+    /* Static anchor: 32deg is where the logo's arc begins. Never animated. */
+    transform: rotate(32deg);
     animation: intro-arc 3000ms linear both;
   }
 
@@ -86,48 +88,45 @@
   /* Per-segment easing, measured from the source rather than assumed. A single
      ease-in-out across the whole timeline made the regrow whip through the
      middle and slam to a stop -- the source does not do that. */
+  /* The arc is anchored at ONE point (32deg, where the logo's arc begins) for
+     the whole sequence and only its LENGTH animates -- it leaves and returns
+     along the same path, from the same end. Rotating it during the regrow made
+     it grow back from the opposite end, which reads as the ring shifting
+     rather than filling in. Nothing rotates now, so nothing can appear to move.
+
+     Easing is per segment, measured from the source: the draw-in is a gentle
+     ease-out (46% drawn at 24% of the beat, 80% at 48%, 94% at 76% -- fitted
+     to cubic-bezier(0.26, 0.5, 0.44, 1), RMSE 0.015); the regrow is linear.
+     199.5deg is the logo's true arc sweep. */
   @keyframes intro-arc {
-    /* Draw clockwise from the 36deg anchor. The curve is fitted to the source,
-       which is 46% drawn at 24% of the beat, 80% at 48% and 94% at 76%
-       (RMSE 0.015) -- a gentler ease-out than any of the stock ones. */
     0% {
       stroke-dasharray: 0 360;
-      transform: rotate(36deg);
       animation-timing-function: cubic-bezier(0.26, 0.5, 0.44, 1);
     }
-    /* Closed ring (source: 1.8s of 10s), held briefly. */
+    /* Closed ring (source: 1.8s of 10s), held to 22%. */
     18% {
       stroke-dasharray: 360 360;
-      transform: rotate(36deg);
       animation-timing-function: linear;
     }
     22% {
       stroke-dasharray: 360 360;
-      transform: rotate(36deg);
       animation-timing-function: linear;
     }
-    /* Unwind from the same anchor, uncovering the wordmark. */
+    /* Unwind back to the same anchor, uncovering the wordmark. */
     50% {
       stroke-dasharray: 0 360;
-      transform: rotate(36deg);
       animation-timing-function: linear;
     }
-    /* The anchor swaps to the far end while the arc has no length (invisible). */
     58% {
       stroke-dasharray: 0 360;
-      transform: rotate(231.5deg);
       animation-timing-function: linear;
     }
-    /* Redraw anticlockwise into the logo's real lockup: 231.5 - 199.5 = 32.
-       The source grows this LINEARLY (normalised 0.25->0.24, 0.50->0.51,
-       1.00->0.99) over 1.4s, i.e. 58% to 72% of the timeline. */
+    /* Return the same way it went in: same anchor, same direction. */
     72% {
       stroke-dasharray: 199.5 360;
-      transform: rotate(32deg);
     }
     100% {
       stroke-dasharray: 199.5 360;
-      transform: rotate(32deg);
     }
   }
 
