@@ -21,12 +21,23 @@
 
 /* ---------------------------------------------------------------------------
    INTRO SEQUENCE
-   Site-only (not part of the design system). Reproduces the beats of the
-   client's loading animation from the logo's own vector paths.
-   Timeline over 3s: 0-33% resolve, 33-60% recede and the ring dissolves,
-   60-87% rebuild, 87-100% hold.
+   Site-only (not part of the design system).
+
+   Timings and angles are MEASURED from the client's video, not estimated:
+   the mark's centre and radius are constant throughout, so nothing scales --
+   only the arc's sweep animates. The arc is anchored at 36deg and draws
+   clockwise to a full circle, unwinds from the same anchor (uncovering the
+   wordmark beneath it), then redraws from the opposite end into the final
+   198deg lockup. Scaled from the source's 10s to 3s.
    --------------------------------------------------------------------------- */
 @layer components {
+  /* Hide the page behind the curtain until the intro has run. index.html sets
+     the attribute before first paint and clears it after 5s as a failsafe, so
+     a JS failure can never leave the site invisible. */
+  html[data-intro='pending'] #root {
+    visibility: hidden;
+  }
+
   .intro {
     opacity: 1;
     transition: opacity 520ms var(--ease-out-soft);
@@ -47,25 +58,22 @@
     animation: intro-glow 3000ms var(--ease-out-soft) both;
   }
 
-  .intro-scale {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: intro-scale 3000ms var(--ease-out-soft) both;
-  }
-
-  .intro-ring {
-    animation: intro-ring 3000ms var(--ease-out-soft) both;
+  /* pathLength=360 on the circle means the dash array is written in degrees. */
+  .intro-arc {
+    transform-box: view-box;
+    transform-origin: 505px 502.2px;
+    animation: intro-arc 3000ms cubic-bezier(0.65, 0, 0.35, 1) both;
   }
 
   .intro-text {
-    animation: intro-text 3000ms var(--ease-out-soft) both;
+    animation: intro-text 3000ms linear both;
   }
 
   @keyframes intro-glow {
     0% {
       opacity: 0;
     }
-    25% {
+    15% {
       opacity: 1;
     }
     100% {
@@ -73,56 +81,46 @@
     }
   }
 
-  /* Scale up, recede, then settle into the lockup. */
-  @keyframes intro-scale {
+  @keyframes intro-arc {
+    /* draw clockwise from the 36deg anchor to a closed ring */
     0% {
-      transform: scale(0.52);
+      stroke-dasharray: 0 360;
+      transform: rotate(36deg);
     }
-    33% {
-      transform: scale(1);
+    22% {
+      stroke-dasharray: 360 360;
+      transform: rotate(36deg);
     }
-    60% {
-      transform: scale(0.74);
+    /* unwind from the same anchor, uncovering the wordmark */
+    50% {
+      stroke-dasharray: 0 360;
+      transform: rotate(36deg);
     }
-    87% {
-      transform: scale(1);
+    /* the anchor swaps to the far end while the arc has no length (invisible) */
+    58% {
+      stroke-dasharray: 0 360;
+      transform: rotate(231deg);
+    }
+    /* redraw anticlockwise into the final lockup: 231 - 198 = 33 */
+    74% {
+      stroke-dasharray: 198 360;
+      transform: rotate(33deg);
     }
     100% {
-      transform: scale(1);
+      stroke-dasharray: 198 360;
+      transform: rotate(33deg);
     }
   }
 
-  /* The ring dissolves in the middle beat and rebuilds. */
-  @keyframes intro-ring {
-    0% {
-      opacity: 0;
-    }
-    28% {
-      opacity: 1;
-    }
-    52% {
-      opacity: 0;
-    }
-    64% {
-      opacity: 0;
-    }
-    87% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  /* The wordmark arrives just after the ring and stays throughout. */
+  /* The wordmark is under the ring, so it can appear while fully covered. */
   @keyframes intro-text {
     0% {
       opacity: 0;
     }
-    12% {
+    21% {
       opacity: 0;
     }
-    33% {
+    26% {
       opacity: 1;
     }
     100% {
@@ -130,12 +128,9 @@
     }
   }
 
-  /* Motion-sensitive visitors never see this component at all (it returns
-     null), but belt and braces if the query flips mid-session. */
   @media (prefers-reduced-motion: reduce) {
     .intro-glow,
-    .intro-scale,
-    .intro-ring,
+    .intro-arc,
     .intro-text {
       animation: none;
     }

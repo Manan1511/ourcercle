@@ -1,72 +1,72 @@
-import { useEffect, useRef, useState } from 'react'
-import { LOGO_RING_PATH, LOGO_TEXT_PATH, LOGO_VIEWBOX } from '../ui/logo-paths'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import { LOGO_TEXT_PATH, LOGO_VIEWBOX } from '../ui/logo-paths'
 
 /**
  * The brand loading sequence, rebuilt from the client's animation.
  *
  * The supplied MP4 is 19.9MB and 10s -- roughly 110x the site's entire JS and
- * CSS payload, which would wreck first paint and Largest Contentful Paint on
- * the very pages that need to rank. This reproduces its four beats from the
- * logo's own vector paths in a few KB, at any resolution, in either
- * orientation:
+ * CSS payload -- so gating the homepage behind it would wreck first paint and
+ * Largest Contentful Paint on the pages that need to rank. This reproduces it
+ * in a few KB from the logo's own geometry.
  *
- *   1. the mark scales up and resolves
- *   2. it recedes and the ring dissolves, leaving the wordmark
- *   3. the ring rebuilds into the final lockup
- *   4. a brief hold, then the curtain lifts
+ * MEASURED FROM THE SOURCE FILE, not eyeballed. The mark never moves or
+ * scales: its centre and radius are constant across all 300 frames. The only
+ * thing that animates is the arc's sweep, plus the wordmark underneath:
  *
- * Compressed from 10s to 3s (the original's last 2.6s is a static hold).
+ *   1. the arc is anchored at 36 degrees and draws CLOCKWISE to a closed ring
+ *      (0.5s->123deg, 0.8s->252deg, 1.2s->321deg, 2.2s->360deg)
+ *   2. it unwinds from that same anchor, uncovering the "CERCLE" lettering
+ *      that sits beneath it in the same band, until only the wordmark is left
+ *   3. it redraws from the OPPOSITE end (231deg, growing anticlockwise) into
+ *      the final 198-degree lockup
+ *   4. hold
  *
- * It renders only after mount, so the prerendered HTML a crawler receives is
- * the real page -- the intro never becomes the Largest Contentful Paint
- * element, and the content is present even if this never runs.
+ * Compressed from 10s to 3s; the original's last 2.6s is a static hold.
+ *
+ * Rendered through a portal so the page can be hidden behind it, and only
+ * after mount so the prerendered HTML a crawler receives is the real page.
  */
 
+/** Ring geometry in the logo's 1000-unit viewBox, fitted to the artwork. */
+const CX = 505
+const CY = 502.2
+const RADIUS = 415.8
+const STROKE = 174.4
+
 const TOTAL_MS = 3000
-/** Time for the curtain to fade once the sequence finishes. */
 const EXIT_MS = 520
 
-export default function Intro({ onDone }: { onDone?: () => void }) {
-  // Never render during prerender: the static HTML must be the real page.
+/** Matches the failsafe in index.html that un-hides the page. */
+const clearPending = () => document.documentElement.removeAttribute('data-intro')
+
+export default function Intro() {
   const [mounted, setMounted] = useState(false)
   const [leaving, setLeaving] = useState(false)
   const [gone, setGone] = useState(false)
   const skipRef = useRef<HTMLButtonElement>(null)
 
+  const dismiss = useCallback(() => {
+    setLeaving(true)
+    clearPending()
+    window.setTimeout(() => setGone(true), EXIT_MS)
+  }, [])
+
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       // Motion-sensitive visitors get the site, not a wall.
+      clearPending()
       setGone(true)
-      onDone?.()
       return
     }
     setMounted(true)
-  }, [onDone])
+  }, [])
 
   useEffect(() => {
     if (!mounted || gone) return
+    const timer = window.setTimeout(dismiss, TOTAL_MS)
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && dismiss()
 
-    const finish = () => {
-      setLeaving(true)
-      window.setTimeout(() => {
-        setGone(true)
-        onDone?.()
-      }, EXIT_MS)
-    }
-
-    const timer = window.setTimeout(finish, TOTAL_MS)
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        window.clearTimeout(timer)
-        finish()
-      }
-    }
-
-    // Hold scroll while the curtain is up. Restoring unconditionally rather
-    // than to a captured previous value: if this ever runs while overflow is
-    // already 'hidden' (a fast remount, StrictMode's double-invoke), capturing
-    // would restore 'hidden' forever and wedge the page unscrollable.
     document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', onKey)
     skipRef.current?.focus()
@@ -74,21 +74,24 @@ export default function Intro({ onDone }: { onDone?: () => void }) {
     return () => {
       window.clearTimeout(timer)
       document.removeEventListener('keydown', onKey)
+      // Restore unconditionally: capturing a previous value would wedge the
+      // page unscrollable if this ever re-ran while already locked.
       document.body.style.overflow = ''
     }
-  }, [mounted, gone, onDone])
+  }, [mounted, gone, dismiss])
+
+  // Belt and braces -- if this unmounts for any reason, un-hide the page.
+  useEffect(() => clearPending, [])
 
   if (!mounted || gone) return null
 
-  return (
+  return createPortal(
     <div
-      // Deliberately NOT aria-hidden: the Skip button inside it takes focus,
-      // and hiding a focused element from assistive tech is invalid (the
-      // browser blocks it). The decorative parts are hidden individually.
+      // Deliberately NOT aria-hidden: the Skip button inside takes focus, and
+      // hiding a focused element from assistive tech is invalid.
       data-leaving={leaving || undefined}
       className="intro fixed inset-0 z-100 grid place-items-center bg-(--color-canvas)"
     >
-      {/* The spotlight from the original: warm wine, low and to the left. */}
       <div
         aria-hidden="true"
         className="intro-glow pointer-events-none absolute inset-0"
@@ -97,40 +100,39 @@ export default function Intro({ onDone }: { onDone?: () => void }) {
       <svg
         aria-hidden="true"
         viewBox={LOGO_VIEWBOX}
-        className="intro-mark relative w-[42vmin] text-(--color-primary)"
+        className="relative w-[42vmin] text-(--color-primary)"
       >
-        <g className="intro-scale">
-          <path
-            className="intro-ring"
-            fill="currentColor"
-            fillRule="evenodd"
-            d={LOGO_RING_PATH}
-          />
-          <path
-            className="intro-text"
-            fill="currentColor"
-            fillRule="evenodd"
-            d={LOGO_TEXT_PATH}
-          />
-        </g>
+        {/* The wordmark sits beneath the arc in the same band; the unwinding
+            arc is what uncovers it, exactly as in the source. */}
+        <path
+          className="intro-text"
+          fill="currentColor"
+          fillRule="evenodd"
+          d={LOGO_TEXT_PATH}
+        />
+        {/* pathLength=360 lets the dash array be written directly in degrees. */}
+        <circle
+          className="intro-arc"
+          cx={CX}
+          cy={CY}
+          r={RADIUS}
+          pathLength={360}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={STROKE}
+        />
       </svg>
 
-      {/* Accessibility escape hatch. Keyboard users also get Escape. */}
       <button
         ref={skipRef}
         type="button"
         aria-label="Skip the intro animation"
-        onClick={() => {
-          setLeaving(true)
-          window.setTimeout(() => {
-            setGone(true)
-            onDone?.()
-          }, EXIT_MS)
-        }}
-        className="absolute bottom-8 right-8 rounded-(--radius-control) px-3 py-2 text-xs tracking-[0.14em] uppercase text-(--color-text-subtle) transition-colors hover:text-(--color-text)"
+        onClick={dismiss}
+        className="absolute right-8 bottom-8 rounded-(--radius-control) px-3 py-2 text-xs tracking-[0.14em] uppercase text-(--color-text-subtle) transition-colors hover:text-(--color-text)"
       >
         Skip
       </button>
-    </div>
+    </div>,
+    document.body,
   )
 }

@@ -7,6 +7,21 @@
     <!-- Per-page <title> and meta tags are injected at build time by src/components/Seo.tsx -->
   </head>
   <body>
+    <script>
+      /* Hide the homepage until the intro curtain is up, so there is no flash
+         of content before it mounts. Runs before first paint. The timeout is a
+         failsafe: if hydration never happens, the page must not stay hidden. */
+      (function () {
+        try {
+          var p = location.pathname
+          if (p === '/' || p === '/index.html') {
+            var d = document.documentElement
+            d.setAttribute('data-intro', 'pending')
+            setTimeout(function () { d.removeAttribute('data-intro') }, 5000)
+          }
+        } catch (e) {}
+      })()
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
