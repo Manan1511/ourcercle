@@ -28,11 +28,21 @@ import { LOGO_TEXT_PATH, LOGO_VIEWBOX } from '../ui/logo-paths'
  * after mount so the prerendered HTML a crawler receives is the real page.
  */
 
-/** Ring geometry in the logo's 1000-unit viewBox, fitted to the artwork. */
+/**
+ * Ring geometry in the logo's 1000-unit viewBox, fitted to the artwork.
+ *
+ * The stroke is sized to the LETTERING, not to the logo's own ring: measured
+ * from the artwork the wordmark spans radius 313.7..503.5 (height 189.8) while
+ * the ring spans 326.6..504.9 (width 178.3). The letters reach ~13 units
+ * further inward, so a ring at its own width leaves their inner tips poking
+ * out while it is supposed to be covering them. Matching the strip to the font
+ * height makes the overlap exact. The difference is ~1% of the mark's width
+ * and is imperceptible in the final lockup.
+ */
 const CX = 505
 const CY = 502.2
-const RADIUS = 415.8
-const STROKE = 174.4
+const RADIUS = 408.6
+const STROKE = 189.8
 
 const TOTAL_MS = 3000
 const EXIT_MS = 520
