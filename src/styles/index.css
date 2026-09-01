@@ -47,15 +47,20 @@
   --color-danger: var(--color-wine-300);
 
   /* Typography
-     TODO: the logo is a geometric grotesque; swap these once the client
-     confirms the licensed brand faces. */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-display: var(--font-sans);
+     Inter for body/UI -- legible at small sizes, safe fallback stack.
+     Fraunces for headings -- a characterful serif that contrasts with the
+     logo's tight geometric lettering rather than competing with it; its
+     optical-size axis makes it more expressive at hero sizes automatically.
+     TODO: swap for licensed brand faces if/when the client specifies any. */
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, 'Times New Roman', serif;
 
   --text-display: 4rem;
-  --text-display--line-height: 1.02;
-  --text-display--letter-spacing: -0.03em;
-  --text-display--font-weight: 600;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.01em;
+  --text-display--font-weight: 500;
 
   /* Layout */
   --container-content: 72rem;
@@ -100,7 +105,8 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    /* Fraunces reads cramped under the tight tracking a grotesque sans wants. */
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
 
