@@ -31,7 +31,7 @@ export interface PageContent {
 export const home: PageContent = {
   meta: {
     // Home owns its whole title -- appending the brand would repeat it.
-    title: 'OurCercle — curated experiences, real human connection',
+    title: 'OurCercle · curated experiences, real human connection',
     absoluteTitle: true,
     description:
       'A social experiences community built around real human connection. Thoughtfully curated gatherings that bring together people, perspectives and stories.',
@@ -39,7 +39,7 @@ export const home: PageContent = {
   hero: {
     eyebrow: 'A social experiences community',
     heading: 'Step outside your usual circle.',
-    body: 'We create thoughtfully curated experiences that bring together people, perspectives and stories — from intimate Chef’s Tables to art, beauty and culture. Every Cercle is designed to put you in a room of people you may never have met otherwise.',
+    body: 'We create thoughtfully curated experiences that bring together people, perspectives and stories, from intimate Chef’s Tables to art, beauty and culture. Every Cercle is designed to put you in a room of people you may never have met otherwise.',
     cta: { label: 'Request an invite', href: '/invite' },
   },
   sections: [

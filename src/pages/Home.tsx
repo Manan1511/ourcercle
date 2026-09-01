@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Intro from '../components/Intro'
 import Seo from '../components/Seo'
 import { formats, heroImage } from '../content/cercles'
@@ -22,7 +23,7 @@ export default function Home() {
 
       <Section tone="canvas" size="lg">
         <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
+          <div data-reveal>
             <Eyebrow className="mb-4">{home.hero.eyebrow}</Eyebrow>
             <Heading level={1} size="display">
               {home.hero.heading}
@@ -37,7 +38,9 @@ export default function Home() {
             )}
           </div>
           {/* Portrait hero photograph, still outstanding. */}
-          <ImageSlot ratio={heroImage.ratio} label={heroImage.label} />
+          <div data-reveal style={{ '--reveal-delay': '120ms' } as CSSProperties}>
+            <ImageSlot ratio={heroImage.ratio} label={heroImage.label} />
+          </div>
         </Container>
       </Section>
 
@@ -52,12 +55,16 @@ export default function Home() {
           </p>
 
           <ul className="mt-12 grid list-none grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-6">
-            {formats.map((format) => (
-              <li key={format.slug}>
+            {formats.map((format, i) => (
+              <li
+                key={format.slug}
+                data-reveal
+                style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
+              >
                 <Card
                   tone="raised"
                   interactive
-                  className="flex h-full flex-col gap-4 overflow-hidden p-0"
+                  className="flex h-full flex-col gap-4 overflow-hidden p-0 transition-transform duration-(--duration-base) ease-(--ease-out-soft) hover:-translate-y-1"
                 >
                   <ImageSlot
                     ratio="3 / 2"
@@ -82,20 +89,24 @@ export default function Home() {
             ))}
           </ul>
 
-          <Button to="/cercles" variant="outline" className="mt-10">
-            All the Cercles
-          </Button>
+          <div data-reveal>
+            <Button to="/cercles" variant="outline" className="mt-10">
+              All the Cercles
+            </Button>
+          </div>
         </Container>
       </Section>
 
       <Section tone="alt">
-        <Container width="prose" className="flex flex-col items-center gap-7 text-center">
-          <Heading level={2} size="xl">
-            There is a seat at the next one.
-          </Heading>
-          <Button to={site.cta.href} variant="accent" size="lg">
-            {site.cta.label}
-          </Button>
+        <Container width="prose">
+          <div data-reveal className="flex flex-col items-center gap-7 text-center">
+            <Heading level={2} size="xl">
+              There is a seat at the next one.
+            </Heading>
+            <Button to={site.cta.href} variant="accent" size="lg">
+              {site.cta.label}
+            </Button>
+          </div>
         </Container>
       </Section>
     </>

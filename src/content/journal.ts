@@ -24,7 +24,7 @@ export interface JournalEntry {
 export const journalMeta = {
   title: 'Journal',
   description:
-    'Dispatches from past Cercles — notes on rooms, menus, questions and the occasional friendship we can take no credit for.',
+    'Dispatches from past Cercles. Notes on rooms, menus, questions and the occasional friendship we can take no credit for.',
   eyebrow: 'Journal',
   badge: 'Draft entries, illustrative',
   heading: 'Dispatches from the table.',
@@ -42,7 +42,7 @@ export const entries: JournalEntry[] = [
     title: 'The dish nobody could name',
     excerpt:
       'On the fourth course, the table stopped talking for the first time all night, and then didn’t stop talking about it.',
-    imageLabel: 'Dispatch photo — table detail (3:2)',
+    imageLabel: 'Dispatch photo, table detail (3:2)',
     draft: true,
   },
   {
@@ -51,7 +51,7 @@ export const entries: JournalEntry[] = [
     title: 'Fourteen strangers, one question',
     excerpt:
       'We asked what people would unlearn if they could. A retired judge and a 24-year-old animator gave the same answer.',
-    imageLabel: 'Dispatch photo — salon corner (3:2)',
+    imageLabel: 'Dispatch photo, salon corner (3:2)',
     draft: true,
   },
   {
@@ -60,7 +60,7 @@ export const entries: JournalEntry[] = [
     title: 'Bad pottery, good company',
     excerpt:
       'Nobody made anything worth keeping, which is exactly why everyone kept theirs.',
-    imageLabel: 'Dispatch photo — studio hands (3:2)',
+    imageLabel: 'Dispatch photo, studio hands (3:2)',
     draft: true,
   },
 ]

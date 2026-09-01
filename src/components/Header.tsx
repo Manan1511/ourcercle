@@ -5,13 +5,26 @@ import { Button, Container, Logo } from '../ui'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { pathname } = useLocation()
 
   // Close the mobile menu on navigation, otherwise it stays open over the new page.
   useEffect(() => setOpen(false), [pathname])
 
+  // The header's rule appears only once the page has actually moved, so the
+  // top of a page reads as one uninterrupted surface.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-(--color-border-subtle) bg-(--color-canvas)/88 backdrop-blur-md">
+    <header
+      data-scrolled={scrolled || undefined}
+      className="site-header sticky top-0 z-50 border-b bg-(--color-canvas)/88 backdrop-blur-md"
+    >
       <Container className="flex h-17 items-center justify-between gap-6">
         <Link to="/" aria-label={`${site.name}, home`} className="flex items-center">
           {/* The mark includes the "CERCLE" wordmark, so no text label. */}
@@ -24,7 +37,7 @@ export default function Header() {
               key={link.href}
               to={link.href}
               className={({ isActive }) =>
-                `text-sm transition-colors duration-(--duration-base) hover:text-(--color-text) ${
+                `nav-link text-sm transition-colors duration-(--duration-base) hover:text-(--color-text) ${
                   isActive
                     ? 'font-semibold text-(--color-text)'
                     : 'text-(--color-text-muted)'
@@ -45,24 +58,16 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? 'Close navigation' : 'Open navigation'}
-          className="rounded-(--radius-control) p-2 text-(--color-text) md:hidden"
+          className="-mr-2 rounded-(--radius-control) p-2 text-(--color-text) md:hidden"
         >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            {open ? (
-              <path d="M5 5l10 10M15 5L5 15" />
-            ) : (
-              <path d="M3 6h14M3 10h14M3 14h14" />
-            )}
-          </svg>
+          {/* Three lines that fold into a cross, rather than swapping one icon
+              for another: the bars rotate to become the arms and the middle one
+              collapses into them. */}
+          <span className="menu-icon" data-open={open || undefined} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
         </button>
       </Container>
 

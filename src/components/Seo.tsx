@@ -32,7 +32,7 @@ export default function Seo({
     ? site.defaultTitle
     : absoluteTitle
       ? title
-      : `${title} — ${site.name}`
+      : `${title} · ${site.name}`
 
   const canonical = new URL(path, site.url).toString()
   const imageUrl = new URL(image, site.url).toString()

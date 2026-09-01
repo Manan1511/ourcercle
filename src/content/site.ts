@@ -37,9 +37,9 @@ export interface SiteConfig {
 
 export const site: SiteConfig = {
   name: 'OurCercle',
-  defaultTitle: 'OurCercle — curated experiences, real human connection',
+  defaultTitle: 'OurCercle · curated experiences, real human connection',
   defaultDescription:
-    'OurCercle is a social experiences community built around real human connection — thoughtfully curated gatherings that bring together people, perspectives and stories.',
+    'OurCercle is a social experiences community built around real human connection. Thoughtfully curated gatherings that bring together people, perspectives and stories.',
   // TODO: set to the real domain before launch. Wrong value here means broken
   // canonical URLs and social previews that point at the wrong site.
   url: 'https://example.com',

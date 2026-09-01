@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Seo from '../components/Seo'
 import { entries, journalMeta } from '../content/journal'
 import { site } from '../content/site'
@@ -13,26 +14,32 @@ export default function Journal() {
       />
 
       <Section tone="canvas" size="lg" className="pb-(--spacing-section)">
-        <Container className="flex flex-col gap-5">
-          <div className="flex flex-wrap items-center gap-4">
-            <Eyebrow>{journalMeta.eyebrow}</Eyebrow>
-            {/* Remove once the entries below are real write-ups. */}
-            <Badge>{journalMeta.badge}</Badge>
+        <Container>
+          <div data-reveal className="flex flex-col gap-5">
+            <div className="flex flex-wrap items-center gap-4">
+              <Eyebrow>{journalMeta.eyebrow}</Eyebrow>
+              {/* Remove once the entries below are real write-ups. */}
+              <Badge>{journalMeta.badge}</Badge>
+            </div>
+            <Heading level={1} size="display">
+              {journalMeta.heading}
+            </Heading>
+            <p className="max-w-2xl text-lg leading-relaxed text-(--color-text-muted)">
+              {journalMeta.intro}
+            </p>
           </div>
-          <Heading level={1} size="display">
-            {journalMeta.heading}
-          </Heading>
-          <p className="max-w-2xl text-lg leading-relaxed text-(--color-text-muted)">
-            {journalMeta.intro}
-          </p>
         </Container>
       </Section>
 
       <Section tone="surface" bordered>
         <Container>
           <ul className="grid list-none grid-cols-[repeat(auto-fit,minmax(17.5rem,1fr))] gap-8">
-            {entries.map((entry) => (
-              <li key={entry.slug}>
+            {entries.map((entry, i) => (
+              <li
+                key={entry.slug}
+                data-reveal
+                style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
+              >
                 <article className="flex flex-col gap-4">
                   <ImageSlot
                     ratio="3 / 2"
@@ -65,13 +72,15 @@ export default function Journal() {
       {/* Cream ground: Section supplies the on-alt text roles, and the button
           must be `accent` -- a `primary` button would be cream on cream. */}
       <Section tone="alt">
-        <Container width="prose" className="flex flex-col items-center gap-7 text-center">
-          <Heading level={2} size="xl">
-            {journalMeta.cta.heading}
-          </Heading>
-          <Button to={site.cta.href} variant="accent" size="lg">
-            {site.cta.label}
-          </Button>
+        <Container width="prose">
+          <div data-reveal className="flex flex-col items-center gap-7 text-center">
+            <Heading level={2} size="xl">
+              {journalMeta.cta.heading}
+            </Heading>
+            <Button to={site.cta.href} variant="accent" size="lg">
+              {site.cta.label}
+            </Button>
+          </div>
         </Container>
       </Section>
     </>

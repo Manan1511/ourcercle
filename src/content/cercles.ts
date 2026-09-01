@@ -50,7 +50,7 @@ export const formats: CercleFormat[] = [
     slug: 'ritual',
     name: 'The Ritual',
     blurb:
-      'Slower and quieter — tea, scent, sound. An hour that asks nothing of you except that you arrive.',
+      'Slower and quieter: tea, scent, sound. An hour that asks nothing of you except that you arrive.',
     seats: '6–10 seats',
     imageLabel: 'Tea and ceramics still life (3:2)',
   },

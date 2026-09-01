@@ -1,9 +1,14 @@
-import { Outlet, ScrollRestoration } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
+import { useReveal } from '../lib/useReveal'
 import Header from './Header'
 import Footer from './Footer'
 
 /** Shared page chrome. Wraps every route. */
 export default function Layout() {
+  const { pathname } = useLocation()
+  // Re-scan on navigation so a new page's elements are picked up.
+  useReveal(pathname)
+
   return (
     <div className="flex min-h-dvh flex-col">
       <a
