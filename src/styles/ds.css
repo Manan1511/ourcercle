@@ -1,0 +1,135 @@
+/* Library stylesheet: tokens, semantic roles, and component base styles.
+ * Deliberately does NOT paint html/body -- a component library must not force
+ * a page background on its host. The dark ground comes from
+ * DesignSystemProvider (or the host app's own shell); the site adds it in
+ * index.css. */
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* ---------------------------------------------------------------------------
+   SEMANTIC LAYER
+
+   tokens.css holds the raw ramps (generated from the client's palette).
+   This file maps them to roles. Components reference roles only -- never a
+   raw ramp step -- so re-theming means editing this block alone.
+
+   The site is dark-ground throughout, wine-led, per the brand's loading
+   animation. Every pairing below is contrast-verified in scripts/gen-tokens.py;
+   that script fails the build rather than emitting a failing combination.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces, darkest to lightest */
+  --color-canvas: var(--color-plum-975);
+  --color-surface: var(--color-plum-900);
+  --color-surface-raised: var(--color-wine-900);
+  --color-surface-alt: var(--color-teal-900);
+  --color-surface-alt-raised: var(--color-teal-800);
+
+  /* Lines */
+  --color-border: var(--color-plum-700);
+  --color-border-subtle: var(--color-plum-800);
+  --color-border-strong: var(--color-plum-500);
+
+  /* Text */
+  --color-text: var(--color-cream-100);
+  --color-text-muted: var(--color-lilac-300);
+  --color-text-subtle: var(--color-lilac-500);
+  --color-text-inverse: var(--color-wine-900);
+
+  /* Interactive */
+  --color-primary: var(--color-cream-100);
+  --color-primary-hover: var(--color-cream-50);
+  --color-on-primary: var(--color-wine-900);
+  --color-accent: var(--color-wine-600);
+  --color-accent-hover: var(--color-wine-500);
+  --color-on-accent: var(--color-cream-100);
+  --color-link: var(--color-cream-200);
+  --color-focus: var(--color-sage-200);
+
+  /* Status -- derived from the palette, no new hues introduced */
+  --color-success: var(--color-sage-200);
+  --color-warning: var(--color-cream-200);
+  --color-danger: var(--color-wine-300);
+
+  /* Typography
+     Inter for body/UI -- legible at small sizes, safe fallback stack.
+     Fraunces for headings -- a characterful serif that contrasts with the
+     logo's tight geometric lettering rather than competing with it; its
+     optical-size axis makes it more expressive at hero sizes automatically.
+     TODO: swap for licensed brand faces if/when the client specifies any. */
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-display: 'Fraunces Variable', ui-serif, Georgia, 'Times New Roman', serif;
+
+  --text-display: 4rem;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.01em;
+  --text-display--font-weight: 500;
+
+  /* Layout */
+  --container-content: 72rem;
+  --container-prose: 44rem;
+  --spacing-section: 6rem;
+  --spacing-section-lg: 9rem;
+
+  --radius-card: 0.875rem;
+  --radius-control: 0.5rem;
+
+  /* Elevation. Shadows read weakly on dark grounds, so surfaces are
+     separated by a lifted background plus a hairline rather than blur alone. */
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.4), 0 8px 24px oklch(0 0 0 / 0.28);
+  --shadow-raised: 0 2px 4px oklch(0 0 0 / 0.45), 0 16px 48px oklch(0 0 0 / 0.35);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 400ms;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    /* Fraunces reads cramped under the tight tracking a grotesque sans wants. */
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

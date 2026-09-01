@@ -10,7 +10,8 @@
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "tokens": "python scripts/gen-tokens.py"
+    "tokens": "python scripts/gen-tokens.py",
+    "build:ds": "vite build --config vite.config.ds.ts"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
@@ -32,6 +33,19 @@
     "prettier": "^3.6.2",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
-    "vite": "^8.2.2"
-  }
+    "vite": "^8.2.2",
+    "vite-plugin-dts": "^5.1.0"
+  },
+  "types": "./dist-ds/index.d.ts",
+  "module": "./dist-ds/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist-ds/index.d.ts",
+      "import": "./dist-ds/index.js"
+    },
+    "./styles.css": "./dist-ds/cercle.css"
+  },
+  "files": [
+    "dist-ds"
+  ]
 }

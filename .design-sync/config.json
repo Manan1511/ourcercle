@@ -1,0 +1,40 @@
+{
+  "shape": "package",
+  "pkg": "ourcercle",
+  "globalName": "Cercle",
+  "buildCmd": "npm run build:ds",
+  "srcDir": "src/ui",
+  "tsconfig": "tsconfig.ds.json",
+  "cssEntry": "dist-ds/cercle.css",
+  "extraFonts": [
+    "node_modules/@fontsource-variable/inter/index.css",
+    "node_modules/@fontsource-variable/fraunces/opsz.css"
+  ],
+  "componentSrcMap": {
+    "DesignSystemProvider": null
+  },
+  "provider": {
+    "component": "DesignSystemProvider"
+  },
+  "overrides": {
+    "Badge": {
+      "cardMode": "column"
+    },
+    "Button": {
+      "cardMode": "column"
+    },
+    "Heading": {
+      "cardMode": "column"
+    },
+    "Input": {
+      "cardMode": "column"
+    },
+    "Logo": {
+      "cardMode": "column"
+    },
+    "Container": {
+      "cardMode": "column"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
