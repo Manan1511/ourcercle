@@ -1,10 +1,12 @@
-/* Brand faces, self-hosted from the client's supplied files.
+/* Brand faces, self-hosted.
  *
- * Manrope is variable (weight 200-800), so any weight in that range is real.
- * Instrument Serif ships a SINGLE weight (400) plus an italic -- there is no
- * bold cut. Never ask for a heavier weight on the display face: the browser
- * would synthesise it, which smears the letterforms. `font-synthesis` is
- * disabled in ds.css to make that failure visible rather than silent. */
+ * Manrope (the client's supplied file) carries body and UI, weight 200-800.
+ *
+ * Bricolage Grotesque carries display headings, replacing the client's
+ * Instrument Serif per direct request -- a heavy black grotesk rather than a
+ * quiet single-weight serif. Self-hosted from Fontsource's Google Fonts
+ * mirror (OFL), latin + latin-ext subsets, weight 200-800 (headings use the
+ * top of that range; nothing here stops body text from using it too). */
 
 @font-face {
   font-family: 'Manrope';
@@ -15,17 +17,24 @@
 }
 
 @font-face {
-  font-family: 'Instrument Serif';
+  font-family: 'Bricolage Grotesque Variable';
   font-style: normal;
   font-display: swap;
-  font-weight: 400;
-  src: url('./fonts/instrument-serif-regular.woff2') format('woff2');
+  font-weight: 200 800;
+  src: url('./fonts/bricolage-grotesque-variable.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Instrument Serif';
-  font-style: italic;
+  font-family: 'Bricolage Grotesque Variable';
+  font-style: normal;
   font-display: swap;
-  font-weight: 400;
-  src: url('./fonts/instrument-serif-italic.woff2') format('woff2');
+  font-weight: 200 800;
+  src: url('./fonts/bricolage-grotesque-variable-ext.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
 }

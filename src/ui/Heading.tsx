@@ -4,15 +4,15 @@ import { cn } from '../lib/cn'
 type Level = 1 | 2 | 3 | 4
 type Size = 'display' | 'xl' | 'lg' | 'md' | 'sm'
 
-// Instrument Serif ships a single weight (400) and no bold cut, so hierarchy
-// comes from size and spacing rather than weight. Asking for a heavier weight
-// here would smear the letterforms (font-synthesis is disabled in ds.css).
+// Bricolage Grotesque is genuinely variable (200-800), so hierarchy can lean
+// on real weight again, not just size -- unlike Instrument Serif before it,
+// which had one weight and forced every size to font-normal.
 const sizes: Record<Size, string> = {
-  display: 'text-4xl sm:text-5xl lg:text-(length:--text-display) font-normal',
-  xl: 'text-3xl sm:text-4xl font-normal',
-  lg: 'text-2xl sm:text-3xl font-normal',
-  md: 'text-xl font-normal',
-  sm: 'text-lg font-normal',
+  display: 'text-4xl sm:text-5xl lg:text-(length:--text-display) font-extrabold',
+  xl: 'text-3xl sm:text-4xl font-extrabold',
+  lg: 'text-2xl sm:text-3xl font-bold',
+  md: 'text-xl font-bold',
+  sm: 'text-lg font-semibold',
 }
 
 /**

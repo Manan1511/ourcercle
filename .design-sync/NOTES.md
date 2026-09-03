@@ -40,11 +40,16 @@ bundle, it just doesn't get a card of its own.
 Source kit: `C:\Users\manan\Downloads\Personal\ourcercle` (fonts, palettes, logo
 artboards). Not in the repo -- keep a copy if that folder may move.
 
-- **Fonts** are the client's own, self-hosted: Manrope (variable, 200-800) for
-  body/UI and Instrument Serif for display. Converted TTF->WOFF2 with fonttools
-  into `src/styles/fonts/`. **Instrument Serif has one weight (400) and no bold
-  cut**, so `font-synthesis-weight: none` is set in ds.css and `Heading` uses
-  `font-normal` at every size. Do not reintroduce bold headings.
+- **Fonts, self-hosted:** Manrope (variable, 200-800, the client's own file,
+  converted TTF->WOFF2 with fonttools) for body/UI, and **Bricolage Grotesque**
+  (variable, 200-800, latin + latin-ext subsets from Fontsource's Google Fonts
+  mirror, OFL) for display headings. Bricolage replaces the client's supplied
+  Instrument Serif per direct request on 2026-09-04, a heavy black grotesk
+  instead of a quiet single-weight serif -- a real identity change, not a
+  tweak; flag it if the client hasn't seen it. `Heading` now sets real weight
+  per size (`font-extrabold`/`font-bold`/`font-semibold`) since the face is
+  genuinely variable; `font-synthesis-weight: none` stays in ds.css as a guard
+  even though it's no longer covering a single-weight face.
 - **@font-face lives in `src/styles/fonts.css`, NOT in ds.css.** Vite's library
   mode inlines CSS-referenced assets and ignores `assetsInlineLimit`, so
   importing fonts.css from ds.css embedded ~110KB of base64 into cercle.css

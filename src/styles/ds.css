@@ -59,16 +59,20 @@
   --color-warning: var(--color-cream-200);
   --color-danger: var(--color-wine-300);
 
-  /* Typography -- the client's brand faces.
-     Manrope carries body and UI; Instrument Serif carries display headings.
-     Instrument Serif has one weight (400) and no bold cut. */
+  /* Typography.
+     Manrope (the client's supplied file) carries body and UI, weight 200-800.
+     Bricolage Grotesque carries display headings -- a heavy black grotesk,
+     replacing the client's Instrument Serif per direct request. It is
+     genuinely variable (200-800); headings sit at the top of that range. */
   --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Instrument Serif', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-display:
+    'Bricolage Grotesque Variable', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', sans-serif;
 
   --text-display: 4.5rem;
-  --text-display--line-height: 1.02;
-  --text-display--letter-spacing: -0.015em;
-  --text-display--font-weight: 400;
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 800;
 
   /* Layout */
   --container-content: 72rem;
@@ -103,15 +107,17 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    /* Instrument Serif is a display serif: it sets tight and needs no extra
-       negative tracking beyond a hair at large sizes. */
-    font-weight: 400;
-    letter-spacing: -0.005em;
+    /* Heavy and tight, matching the reference: headings sit near the top of
+       the face's real weight range rather than relying on synthetic bold. */
+    font-weight: 800;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
-  /* The display face has a single weight. Refuse synthetic bold/italic so a
-     wrong weight shows up as a design bug rather than smeared letterforms. */
+  /* The display face is genuinely variable (200-800), so synthesis is never
+     needed -- disabled anyway as a guard: if a font fails to load, a missing
+     weight should show up as a fallback face, not a faked-bold approximation
+     of it. */
   html {
     font-synthesis-weight: none;
   }

@@ -41,7 +41,7 @@ token below is verified present.
 | Lines | `--color-border`, `--color-border-subtle`, `--color-border-strong` |
 | Actions | `--color-primary` + `--color-on-primary`, `--color-accent` + `--color-on-accent`, `--color-primary-hover`, `--color-accent-hover`, `--color-link` |
 | Status | `--color-success`, `--color-warning`, `--color-danger`, `--color-focus` |
-| Type | `--font-sans` (Manrope, body/UI), `--font-display` (Instrument Serif, headings), `--text-display` |
+| Type | `--font-sans` (Manrope, body/UI), `--font-display` (Bricolage Grotesque, headings), `--text-display` |
 | Layout | `--container-content`, `--container-prose`, `--spacing-section`, `--spacing-section-lg`, `--radius-card`, `--radius-control`, `--shadow-card` |
 | Motion | `--duration-base`, `--ease-out-soft` |
 
@@ -64,13 +64,15 @@ inverts everything about them:
 2. **Use `variant="accent"` for buttons on cream, never `primary`.** The primary
    button is a cream fill — cream on cream. Accent is the wine fill (6.3:1).
 
-## 4. The display face has one weight
+## 4. The display face is heavy by default
 
-`--font-display` is **Instrument Serif, weight 400 only** — there is no bold cut.
-`font-synthesis-weight` is disabled, so asking a heading for a heavier weight
-gets you nothing rather than a smeared fake bold. **Build heading hierarchy from
-size, never weight** (`Heading` already does this). `--font-sans` is Manrope and
-is genuinely variable (200–800), so weight is free on body and UI text.
+`--font-display` is **Bricolage Grotesque, a genuinely variable grotesk
+(200-800)**, replacing the client's Instrument Serif per direct request. Unlike
+that earlier face, hierarchy can use real weight again: `Heading` sets
+`font-extrabold`/`font-bold`/`font-semibold` by size rather than forcing every
+size to the same weight. Don't drop headings back to `font-normal`, the look is
+built around the heavy end of the range. `--font-sans` is Manrope, also
+variable (200-800), for body and UI text.
 
 ## 5. `Logo` paints with `currentColor`
 
