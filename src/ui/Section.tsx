@@ -65,7 +65,10 @@ export default function Section({
         tones[tone],
         effectiveSize === 'sm' && 'py-16',
         effectiveSize === 'md' && 'py-(--spacing-section)',
-        effectiveSize === 'lg' && 'py-(--spacing-section-lg)',
+        // The full lg amount is tuned for desktop's wider, shorter viewport --
+        // on a phone it turns a bare CTA section into mostly empty space, so
+        // phones get the md amount and only step up to lg from md: (768px) up.
+        effectiveSize === 'lg' && 'py-(--spacing-section) md:py-(--spacing-section-lg)',
         bordered && 'border-t border-(--color-border-subtle)',
         className,
       )}
