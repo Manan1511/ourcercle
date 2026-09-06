@@ -11,6 +11,7 @@ export { default as Input } from './Input'
 export { default as Logo } from './Logo'
 export { default as Prose } from './Prose'
 export { default as Section } from './Section'
+export { default as Textarea } from './Textarea'
 
 export type { ButtonProps, ButtonSize, ButtonVariant } from './Button'
 export type { BadgeTone } from './Badge'

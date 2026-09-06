@@ -1,6 +1,7 @@
 /**
- * Per-page copy for pages that don't yet have their own designed
- * implementation. Journal lives in journal.ts.
+ * Homepage copy. Home is the only page still using this generic shape --
+ * Journal, Cercles, Story and Invite each have their own typed content file
+ * now that all five routes are implemented.
  *
  * DRAFT: client must approve all wording.
  */
@@ -12,11 +13,6 @@ export interface PageMeta {
   absoluteTitle?: boolean
 }
 
-export interface Section {
-  heading: string
-  body: string
-}
-
 export interface PageContent {
   meta: PageMeta
   hero: {
@@ -25,7 +21,6 @@ export interface PageContent {
     body: string
     cta?: { label: string; href: string }
   }
-  sections: Section[]
 }
 
 export const home: PageContent = {
@@ -41,31 +36,5 @@ export const home: PageContent = {
     heading: 'Step outside your usual circle.',
     body: 'We create thoughtfully curated experiences that bring together people, perspectives and stories, from intimate Chef’s Tables to art, beauty and culture. Every Cercle is designed to put you in a room of people you may never have met otherwise.',
     cta: { label: 'Request an invite', href: '/invite' },
-  },
-  sections: [
-    {
-      heading: 'Meaningful experiences',
-      body: 'Every gathering is designed around a room, a table and a reason to be there.',
-    },
-    {
-      heading: 'Meaningful conversations',
-      body: 'Small enough that nobody is a bystander, considered enough that nobody is networking.',
-    },
-  ],
-}
-
-/** Routes designed but not yet implemented. Rendered noindex until they are. */
-export const upcoming: Record<string, PageContent> = {
-  invite: {
-    meta: {
-      title: 'Request an invite',
-      description: 'Request an invite to an upcoming Cercle.',
-    },
-    hero: {
-      eyebrow: 'Request an invite',
-      heading: 'Tell us a little about you.',
-      body: 'The invite form is being built. Until it lands, write to hello@ourcercle.com and we will take it from there.',
-    },
-    sections: [],
   },
 }

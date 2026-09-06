@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Cercles from './pages/Cercles'
 import Story from './pages/Story'
 import Journal from './pages/Journal'
-import Upcoming from './pages/Upcoming'
+import Invite from './pages/Invite'
 import NotFound from './pages/NotFound'
 
 /**
@@ -15,9 +15,8 @@ import NotFound from './pages/NotFound'
  * without JavaScript. Routes must therefore be statically enumerable here --
  * a path that only exists at runtime will not be prerendered.
  *
- * /invite is designed but not yet implemented; it renders a noindex
- * placeholder so the designed navigation isn't broken. The pre-launch
- * /about, /services and /contact paths are redirected in netlify.toml.
+ * The pre-launch /about, /services and /contact paths are redirected in
+ * netlify.toml.
  */
 export const routes: RouteRecord[] = [
   {
@@ -28,7 +27,7 @@ export const routes: RouteRecord[] = [
       { path: 'cercles', element: <Cercles /> },
       { path: 'journal', element: <Journal /> },
       { path: 'story', element: <Story /> },
-      { path: 'invite', element: <Upcoming page="invite" path="/invite" /> },
+      { path: 'invite', element: <Invite /> },
       { path: '*', element: <NotFound /> },
     ],
   },
