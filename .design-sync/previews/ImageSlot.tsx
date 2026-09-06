@@ -7,7 +7,7 @@ const SAMPLE =
 
 export const Empty = () => (
   <div className="p-6">
-    <ImageSlot ratio="3 / 2" label="Dispatch photo — table detail (3:2)" />
+    <ImageSlot ratio="3 / 2" label="Dispatch photo, table detail (3:2)" />
   </div>
 )
 
@@ -44,5 +44,13 @@ export const InAGrid = () => (
         </Heading>
       </article>
     ))}
+  </div>
+)
+
+// tone="cream" is for a slot placed on a cream ground (Section tone="alt") --
+// the dark-tone placeholder's border and label would barely read there.
+export const OnCreamGround = () => (
+  <div className="max-w-105 bg-(--color-primary) p-6">
+    <ImageSlot ratio="4 / 5" tone="cream" label="Founder portrait, warm light (4:5)" />
   </div>
 )

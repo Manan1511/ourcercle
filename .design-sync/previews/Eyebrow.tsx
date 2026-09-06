@@ -8,9 +8,9 @@ export const Default = () => (
 
 export const AboveHeading = () => (
   <div className="p-6">
-    <Eyebrow className="mb-4">The collection</Eyebrow>
+    <Eyebrow className="mb-4">The Cercles</Eyebrow>
     <Heading level={2} size="xl">
-      Pieces made to be kept
+      Four ways into a room
     </Heading>
   </div>
 )

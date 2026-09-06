@@ -80,6 +80,38 @@ Logo. Without it their stories render wider than a grid cell and get cropped
 element so content isn't flush against the provider's dark ground; `Section` is
 deliberately unpadded because its stories are full-bleed grounds.
 
+## Card and ImageSlot both have a `cream` tone
+
+Added for objects (an event card, a portrait) that sit as a single highlighted
+thing on cream, distinct from `Section tone="alt"` (a full-bleed cream band).
+`Card`'s cream border/hover use `--color-on-primary` at low opacity rather than
+the dark-ground border tokens, which read too heavy on cream. `ImageSlot`'s
+cream placeholder exists because the dark-tone one (hardcoded
+`--color-surface-raised` / `--color-border-strong`, neither rebound by
+Section's cream mechanism) was nearly illegible when the Story page placed one
+on a cream ground -- border almost invisible, label text too low-contrast to
+read. Always pass `tone="cream"` explicitly for either component when it sits
+on or near cream; neither auto-detects its ground.
+
+## `Textarea` added, styled to match `Input`
+
+Same padding/border/focus/error/hint behaviour, `min-h-30` (120px) matching the
+one real usage (the Invite page's "what draws you here" field) exactly.
+
+## Preview files carried stale wrong-brand copy for a long time
+
+Card, Badge, Button, Input, Eyebrow and Prose's authored previews (and the
+conventions.md idiomatic example, which the design agent reads as literal
+guidance) still had copy from BEFORE the OurCercle pivot -- "The Atelier Coat",
+"The collection", "book a consultation", undyed wool, garments -- because
+`.design-sync/previews/` lives outside `src/`, so the brand-adoption pass never
+touched it. All rewritten to real OurCercle vocabulary and real routes (a
+`Button to="/contact"` example pointed at a redirected, dead path). **Check
+`.design-sync/previews/*.tsx` AND this file's own idiomatic examples** whenever
+doing a brand-voice sweep, not just `src/content/` -- they render as visible
+cards in the component picker and get imitated by the design agent, so stale
+copy here is not cosmetic.
+
 ## Known render warns
 
 None outstanding. The final validate run exits 0 with zero warnings.
@@ -96,13 +128,24 @@ None outstanding. The final validate run exits 0 with zero warnings.
   Fetch it to `.design-sync/.cache/remote-sync.json` and pass `--remote` so the
   next sync diffs instead of re-verifying everything. Grades in
   `.design-sync/.cache/` are gitignored and do not carry across machines.
-- **Renaming font files orphans the old ones remotely.** The brand-font switch
-  left 10 Inter/Fraunces `.woff2` behind that had to be deleted explicitly; an
-  anchored re-sync derives this automatically via `upload.deletePaths`.
-- **Preview copy is invented brand voice**, not client-approved. It reads as
-  real product copy ("The Atelier Coat", "A quieter kind of luxury"). If the
-  client's actual positioning differs, the previews should be re-authored — the
-  design agent imitates this copy.
+- **Renaming font files orphans the old ones remotely, and the anchor diff does
+  NOT catch it.** This claim used to say the opposite -- wrong. `_ds_sync.json`
+  only records per-component render hashes; `cfg.extraFonts` files are never
+  part of any component's hash, so a renamed/removed font is invisible to
+  `upload.deletePaths`. Proof: the Instrument Serif to Bricolage Grotesque swap
+  left `instrument-serif-regular.woff2` and `instrument-serif-italic.woff2`
+  sitting on the remote for an entire subsequent sync (the one that added Card,
+  ImageSlot and Textarea) before anyone noticed, because the anchor-based
+  workflow gave no signal that anything was wrong. Caught only by reading
+  `list_files` at the end and eyeballing the `fonts/` list by hand. **Whenever
+  `cfg.extraFonts` changes, diff the remote `fonts/` listing against the local
+  `ds-bundle/fonts/` directory explicitly** -- don't trust the anchor for this.
+- **Preview copy is invented brand voice**, not client-approved, though it is
+  now at least the RIGHT brand (see "Preview files carried stale wrong-brand
+  copy" above -- the literal fashion-brand leftovers are gone as of this sync).
+  Format names, capacities and event details are still drafts pending client
+  sign-off; if the client's actual positioning differs, the previews should be
+  re-authored -- the design agent imitates this copy directly.
 - **Only a PNG logo was supplied, no vector.** The shipped path is a trace; if
   real vector artwork arrives, replace `src/ui/Logo.tsx` and recapture grades.
 - **Fonts are committed to the repo** (`src/styles/fonts/`), so they no longer

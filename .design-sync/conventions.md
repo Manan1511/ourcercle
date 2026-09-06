@@ -91,6 +91,15 @@ arrives, so layouts don't move when real images land. Use `Heading` with an
 explicit `level` for document structure and `size` for appearance; they are
 independent. Long-form copy goes in `Prose`, which styles its descendants, so
 write plain `<h2>/<p>/<ul>` inside it rather than per-element classes.
+`Textarea` matches `Input`'s padding, border and error/hint behaviour exactly
+— pair them in the same form without adjustment.
+
+**`Card` and `ImageSlot` both take `tone="cream"`** for the case where a
+*single object* (an event listing, a portrait) sits on cream rather than a
+whole section. This is different from `Section tone="alt"`: use the `Section`
+prop for a full-bleed cream band, and the component-level `cream` tone for one
+card or image floating inside an otherwise dark section (see OurCercle's
+Cercles and Story pages for real examples of each).
 
 ## 7. Where the truth lives
 
@@ -104,12 +113,12 @@ component's real API is in its `<Name>.d.ts`, and usage in `<Name>.prompt.md`.
 <DesignSystemProvider>
   <Section tone="canvas" size="lg">
     <Container>
-      <Eyebrow className="mb-4">The collection</Eyebrow>
-      <Heading level={1} size="display">A quieter kind of luxury</Heading>
+      <Eyebrow className="mb-4">The Cercles</Eyebrow>
+      <Heading level={1} size="display">Four ways into a room.</Heading>
       <p className="mt-6 max-w-2xl text-lg text-(--color-text-muted)">
-        Made slowly, in small numbers.
+        Every Cercle is small on purpose. The format changes; the intent doesn't.
       </p>
-      <Button to="/contact" size="lg" className="mt-9">Book a consultation</Button>
+      <Button to="/invite" size="lg" className="mt-9">Request an invite</Button>
     </Container>
   </Section>
 </DesignSystemProvider>

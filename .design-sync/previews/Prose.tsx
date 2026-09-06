@@ -4,20 +4,19 @@ export const LongForm = () => (
   <Prose className="p-6">
     <h2>Our approach</h2>
     <p>
-      Every piece begins with the material. We buy undyed wool in small lots, which means
-      a season is limited by what the mill can supply rather than by what we choose to
-      make.
+      Every Cercle begins with the room. We compose the guest list by hand, which means a
+      gathering is limited by what makes a good table, not by how many people asked.
     </p>
     <h3>What that means in practice</h3>
     <ul>
-      <li>Runs are small, usually under a hundred</li>
-      <li>Colours vary slightly between lots</li>
-      <li>Nothing is restocked once it sells through</li>
+      <li>Rooms are small, usually under fourteen</li>
+      <li>The mix of people varies every time, on purpose</li>
+      <li>Nothing is repeated the same way twice</li>
     </ul>
     <p>
-      If a piece matters to you, <a href="/contact">tell us</a> and we will hold it.{' '}
-      <strong>We would rather make less and make it properly.</strong>
+      If a Cercle matters to you, <a href="/invite">request an invite</a> and we will hold a
+      seat. <strong>We would rather host well than host often.</strong>
     </p>
-    <blockquote>The best garment is the one you still want in ten years.</blockquote>
+    <blockquote>The best evening is the one you still think about a week later.</blockquote>
   </Prose>
 )
