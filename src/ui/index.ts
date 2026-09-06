@@ -14,4 +14,5 @@ export { default as Section } from './Section'
 
 export type { ButtonProps, ButtonSize, ButtonVariant } from './Button'
 export type { BadgeTone } from './Badge'
+export type { CardTone } from './Card'
 export type { SectionTone } from './Section'

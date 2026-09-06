@@ -56,19 +56,6 @@ export const home: PageContent = {
 
 /** Routes designed but not yet implemented. Rendered noindex until they are. */
 export const upcoming: Record<string, PageContent> = {
-  cercles: {
-    meta: {
-      title: 'The Cercles',
-      description: 'The formats we gather around.',
-    },
-    hero: {
-      eyebrow: 'The Cercles',
-      heading: 'The formats we gather around.',
-      body: 'This page is being built. In the meantime, request an invite and we will be in touch about the next gathering.',
-      cta: { label: 'Request an invite', href: '/invite' },
-    },
-    sections: [],
-  },
   story: {
     meta: {
       title: 'Our story',

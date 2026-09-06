@@ -12,17 +12,22 @@ export type SectionTone = 'canvas' | 'surface' | 'raised' | 'alt' | 'alt-raised'
  * use the --color-text-on-alt* roles.
  */
 /**
- * Inside a cream ground, rebind the text roles rather than only setting a
- * colour. Components style themselves with --color-text-muted / -subtle /
- * -link; left alone those are pale lilacs that vanish on cream. Rebinding
- * means any composed content adapts without knowing it is on a light ground.
+ * Rebind the text roles rather than only setting a colour. Components style
+ * themselves with --color-text-muted / -subtle / -link; left alone those are
+ * pale lilacs that vanish on a cream ground. Rebinding means any composed
+ * content adapts without knowing it sits on a light surface.
+ *
+ * Exported so anything painted cream outside of `Section` itself -- a `Card`,
+ * a one-off panel -- can opt into the same descendant behaviour rather than
+ * re-deriving it.
  */
-const ON_ALT = [
-  'text-(--color-text-on-alt)',
+export const CREAM_TEXT_VARS = [
   '[--color-text-muted:var(--color-text-on-alt-muted)]',
   '[--color-text-subtle:var(--color-text-on-alt-subtle)]',
   '[--color-link:var(--color-text-on-alt)]',
 ].join(' ')
+
+const ON_ALT = `text-(--color-text-on-alt) ${CREAM_TEXT_VARS}`
 
 const tones: Record<SectionTone, string> = {
   canvas: 'bg-(--color-canvas)',
