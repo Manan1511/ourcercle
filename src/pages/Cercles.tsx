@@ -153,9 +153,15 @@ export default function Cercles() {
                       one level below the closing CTA in the design's hierarchy. */}
                   <Link
                     to={site.cta.href}
-                    className="mt-auto text-sm text-(--color-link) transition-colors duration-(--duration-base) hover:text-(--color-on-primary)"
+                    className="group mt-auto inline-flex items-center gap-1 text-sm text-(--color-link) transition-colors duration-(--duration-base) hover:text-(--color-on-primary)"
                   >
-                    Request a seat →
+                    Request a seat
+                    <span
+                      aria-hidden="true"
+                      className="inline-block transition-transform duration-(--duration-base) ease-(--ease-out-soft) group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
                   </Link>
                 </Card>
               </li>

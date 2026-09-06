@@ -46,13 +46,14 @@ export default function ImageSlot({
 
   if (src) {
     return (
-      <img
-        src={src}
-        alt={alt ?? ''}
-        loading={loading}
-        style={{ aspectRatio: ratio }}
-        className={cn(shared, 'object-cover', className)}
-      />
+      <div style={{ aspectRatio: ratio }} className={cn(shared, className)}>
+        <img
+          src={src}
+          alt={alt ?? ''}
+          loading={loading}
+          className="h-full w-full object-cover transition-transform duration-(--duration-slow) ease-(--ease-out-soft) hover:scale-105"
+        />
+      </div>
     )
   }
 

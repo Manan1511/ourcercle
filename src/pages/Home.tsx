@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
 import Intro from '../components/Intro'
 import Seo from '../components/Seo'
 import { formats, heroImage } from '../content/cercles'
@@ -61,30 +62,34 @@ export default function Home() {
                 data-reveal
                 style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
               >
-                <Card
-                  tone="raised"
-                  interactive
-                  className="flex h-full flex-col gap-4 overflow-hidden p-0 transition-transform duration-(--duration-base) ease-(--ease-out-soft) hover:-translate-y-1"
-                >
-                  <ImageSlot
-                    ratio="3 / 2"
-                    src={format.image}
-                    alt={format.imageAlt}
-                    label={format.imageLabel}
-                    className="rounded-none"
-                  />
-                  <div className="flex flex-col gap-2 p-6 pt-0">
-                    <Heading level={3} size="md">
-                      {format.name}
-                    </Heading>
-                    <p className="text-sm leading-relaxed text-(--color-text-muted)">
-                      {format.blurb}
-                    </p>
-                    <p className="mt-1 text-xs tracking-[0.14em] uppercase text-(--color-text-subtle)">
-                      {format.seats}
-                    </p>
-                  </div>
-                </Card>
+                {/* Links to the matching format on /cercles -- a card styled
+                    to lift on hover should actually go somewhere. */}
+                <Link to={`/cercles#${format.slug}`} className="block h-full">
+                  <Card
+                    tone="raised"
+                    interactive
+                    className="flex h-full flex-col gap-4 overflow-hidden p-0"
+                  >
+                    <ImageSlot
+                      ratio="3 / 2"
+                      src={format.image}
+                      alt={format.imageAlt}
+                      label={format.imageLabel}
+                      className="rounded-none"
+                    />
+                    <div className="flex flex-col gap-2 p-6 pt-0">
+                      <Heading level={3} size="md">
+                        {format.name}
+                      </Heading>
+                      <p className="text-sm leading-relaxed text-(--color-text-muted)">
+                        {format.blurb}
+                      </p>
+                      <p className="mt-1 text-xs tracking-[0.14em] uppercase text-(--color-text-subtle)">
+                        {format.seats}
+                      </p>
+                    </div>
+                  </Card>
+                </Link>
               </li>
             ))}
           </ul>

@@ -19,7 +19,12 @@ export default function Layout() {
       </a>
       <Header />
       <main id="main" className="flex-1">
-        <Outlet />
+        {/* Keyed on pathname so the wrapper itself remounts on navigation --
+            without that, only the Outlet's children change and the
+            `.page-transition` animation (attached to this div) never replays. */}
+        <div key={pathname} className="page-transition">
+          <Outlet />
+        </div>
       </main>
       <Footer />
       <ScrollRestoration />

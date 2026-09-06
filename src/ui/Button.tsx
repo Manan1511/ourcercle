@@ -7,15 +7,19 @@ export type ButtonSize = 'sm' | 'md' | 'lg'
 
 const base =
   'inline-flex items-center justify-center gap-2 rounded-(--radius-control) font-medium ' +
-  'transition-colors duration-(--duration-base) ease-(--ease-out-soft) ' +
+  'transition-[background-color,color,transform,box-shadow] duration-(--duration-base) ease-(--ease-out-soft) ' +
+  // A small lift on hover and a settle on press -- filled buttons should feel
+  // like objects you can nudge, not flat color swaps.
+  'hover:-translate-y-px active:translate-y-0 active:duration-(--duration-fast) ' +
   'disabled:pointer-events-none disabled:opacity-50'
 
 const variants: Record<ButtonVariant, string> = {
   // Cream fill, wine label -- 13.1:1. The highest-contrast pairing available.
   primary:
-    'bg-(--color-primary) text-(--color-on-primary) hover:bg-(--color-primary-hover)',
+    'bg-(--color-primary) text-(--color-on-primary) shadow-(--shadow-card) hover:bg-(--color-primary-hover) hover:shadow-(--shadow-raised)',
   // Rose wine fill, cream label -- 6.3:1.
-  accent: 'bg-(--color-accent) text-(--color-on-accent) hover:bg-(--color-accent-hover)',
+  accent:
+    'bg-(--color-accent) text-(--color-on-accent) shadow-(--shadow-card) hover:bg-(--color-accent-hover) hover:shadow-(--shadow-raised)',
   outline:
     'border border-(--color-border-strong) text-(--color-text) hover:bg-(--color-surface-raised)',
   ghost: 'text-(--color-text-muted) hover:text-(--color-text) hover:bg-(--color-surface)',

@@ -37,9 +37,13 @@ export default function Card({
         tone === 'raised' && 'bg-(--color-surface-raised)',
         tone === 'surface' && 'bg-(--color-surface)',
         interactive &&
-          (tone === 'cream'
-            ? 'transition-colors duration-(--duration-base) ease-(--ease-out-soft) hover:border-(--color-on-primary)/35'
-            : 'transition-colors duration-(--duration-base) ease-(--ease-out-soft) hover:border-(--color-border-strong)'),
+          cn(
+            // The lift is the primary cue; border/shadow just reinforce it.
+            'transition-[border-color,transform,box-shadow] duration-(--duration-base) ease-(--ease-out-soft) hover:-translate-y-1 hover:shadow-(--shadow-raised)',
+            tone === 'cream'
+              ? 'hover:border-(--color-on-primary)/35'
+              : 'hover:border-(--color-border-strong)',
+          ),
         className,
       )}
     >
