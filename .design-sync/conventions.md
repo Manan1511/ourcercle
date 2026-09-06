@@ -60,7 +60,10 @@ inverts everything about them:
    text colour and rebinds `--color-text-muted` / `-subtle` / `-link` to their
    on-alt equivalents, so composed content stays legible. Painting
    `bg-(--color-surface-alt)` onto a bare `<div>` skips that and leaves cream
-   text on cream.
+   text on cream. It also defaults `size` to `lg` rather than `md` on both
+   cream tones -- cream is the page's rhythm break, and it only reads as a
+   considered pause if it takes more room than the wine sections around it.
+   Pass `size` explicitly to override.
 2. **Use `variant="accent"` for buttons on cream, never `primary`.** The primary
    button is a cream fill — cream on cream. Accent is the wine fill (6.3:1).
 

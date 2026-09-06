@@ -40,26 +40,32 @@ const tones: Record<SectionTone, string> = {
 export default function Section({
   children,
   tone = 'canvas',
-  size = 'md',
+  size,
   bordered = false,
   className,
   id,
 }: {
   children: ReactNode
   tone?: SectionTone
+  /** Defaults to `lg` on the cream tones, `md` everywhere else -- see below. */
   size?: 'sm' | 'md' | 'lg'
   bordered?: boolean
   className?: string
   id?: string
 }) {
+  // Cream is the page's rhythm break, not just another stripe -- it reads as
+  // a considered pause rather than a beat of the same length as everything
+  // else only if it actually takes more room. Callers can still override.
+  const effectiveSize = size ?? (tone === 'alt' || tone === 'alt-raised' ? 'lg' : 'md')
+
   return (
     <section
       id={id}
       className={cn(
         tones[tone],
-        size === 'sm' && 'py-16',
-        size === 'md' && 'py-(--spacing-section)',
-        size === 'lg' && 'py-(--spacing-section-lg)',
+        effectiveSize === 'sm' && 'py-16',
+        effectiveSize === 'md' && 'py-(--spacing-section)',
+        effectiveSize === 'lg' && 'py-(--spacing-section-lg)',
         bordered && 'border-t border-(--color-border-subtle)',
         className,
       )}
