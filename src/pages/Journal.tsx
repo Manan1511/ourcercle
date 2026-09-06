@@ -16,7 +16,7 @@ export default function Journal() {
       <Section
         tone="canvas"
         size="lg"
-        style={{ paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}
+        style={{ paddingTop: '3rem', paddingBottom: 'var(--spacing-section)' }}
       >
         <Container>
           <div data-reveal className="flex flex-col gap-5">

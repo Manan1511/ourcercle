@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <>
       <Seo title="Page not found" path="/404" noIndex />
-      <Section tone="canvas" size="lg" style={{ paddingTop: 'var(--spacing-section)' }}>
+      <Section tone="canvas" size="lg" style={{ paddingTop: '3rem' }}>
         <Container>
           <Eyebrow>404</Eyebrow>
           <Heading level={1} size="xl" className="mt-4">

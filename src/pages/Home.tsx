@@ -22,7 +22,7 @@ export default function Home() {
         path="/"
       />
 
-      <Section tone="canvas" size="lg" style={{ paddingTop: 'var(--spacing-section)' }}>
+      <Section tone="canvas" size="lg" style={{ paddingTop: '3rem' }}>
         <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div data-reveal>
             <Eyebrow className="mb-4">{home.hero.eyebrow}</Eyebrow>
