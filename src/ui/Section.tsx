@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { cn } from '../lib/cn'
 
 export type SectionTone = 'canvas' | 'surface' | 'raised' | 'alt' | 'alt-raised'
@@ -43,6 +43,7 @@ export default function Section({
   size,
   bordered = false,
   className,
+  style,
   id,
 }: {
   children: ReactNode
@@ -51,6 +52,9 @@ export default function Section({
   size?: 'sm' | 'md' | 'lg'
   bordered?: boolean
   className?: string
+  /** For a one-off top/bottom override -- see the note below on why this
+   *  can't be done via className. */
+  style?: CSSProperties
   id?: string
 }) {
   // Cream is the page's rhythm break, not just another stripe -- it reads as
@@ -61,6 +65,7 @@ export default function Section({
   return (
     <section
       id={id}
+      style={style}
       className={cn(
         tones[tone],
         effectiveSize === 'sm' && 'py-16',
@@ -77,3 +82,13 @@ export default function Section({
     </section>
   )
 }
+
+// A caller passing className="pt-(--spacing-section)" to override this
+// component's own `py-*` looks like it should work through cn()'s
+// tailwind-merge pass, but it doesn't: tailwind-merge doesn't treat `py-*`
+// as conflicting with `pt-*`/`pb-*` for these CSS-var arbitrary values (only
+// exact-same-utility conflicts resolve), so both classes ship and whichever
+// happens to sit later in the compiled stylesheet wins -- not whichever is
+// last in the className string. Confirmed by direct testing; this bit
+// several page-level overrides silently. `style` bypasses the problem
+// entirely since inline styles always win over classes.

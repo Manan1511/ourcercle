@@ -13,7 +13,11 @@ export default function Journal() {
         path="/journal"
       />
 
-      <Section tone="canvas" size="lg" className="pt-(--spacing-section) pb-(--spacing-section)">
+      <Section
+        tone="canvas"
+        size="lg"
+        style={{ paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}
+      >
         <Container>
           <div data-reveal className="flex flex-col gap-5">
             <div className="flex flex-wrap items-center gap-4">

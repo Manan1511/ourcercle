@@ -18,7 +18,11 @@ export default function Invite() {
         path="/invite"
       />
 
-      <Section tone="canvas" size="lg" className="pt-(--spacing-section) pb-(--spacing-section)">
+      <Section
+        tone="canvas"
+        size="lg"
+        style={{ paddingTop: 'var(--spacing-section)', paddingBottom: 'var(--spacing-section)' }}
+      >
         <Container>
           <div data-reveal className="flex flex-col gap-5">
             <Eyebrow>{inviteMeta.eyebrow}</Eyebrow>
