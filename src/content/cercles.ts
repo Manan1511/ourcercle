@@ -1,11 +1,13 @@
 /**
  * The Cercle formats.
  *
- * DRAFT: the four format names are invented and must be confirmed by the
- * client, as must the capacity ranges and policies (dietary notice, "phones
- * stay in pockets", etc). Sourced from the client's Claude Design canvas
- * (`The Cercles.dc.html`), which is the design's source of truth -- treat
- * anything here as a transcription of that file, not a separate draft.
+ * DRAFT: Chef's Table, the Studio and the Ritual are invented names and must
+ * be confirmed by the client, as must their capacity ranges and policies
+ * (dietary notice, "phones stay in pockets", etc) -- sourced from the
+ * client's Claude Design canvas (`The Cercles.dc.html`), which is the
+ * design's source of truth for those three. Sip & Glam is real, sourced from
+ * the client's own one-pager ("Cercle Sip & Glam.pdf") -- see the note above
+ * `upcomingEvents` below for what's still unconfirmed there (date, venue).
  *
  * `blurb` is the short homepage-card version; `description` is the longer
  * paragraph used on /cercles. `imageLabel` / `detailImageLabel` are the
@@ -48,17 +50,17 @@ export const formats: CercleFormat[] = [
     detailImageLabel: 'Chef’s table, plating under low light (3:2)',
   },
   {
-    slug: 'salon',
+    slug: 'sip-and-glam',
     number: 'No. 2',
-    name: 'The Salon',
+    name: 'Sip & Glam',
     blurb:
-      'An evening built around a single question, with a room chosen so that nobody can hide at the edge of it.',
+      'Cocktails, an interactive self-makeup masterclass with a guest artist, and forty of London’s most interesting people in one room.',
     description:
-      'An evening built around a single question, brought by a guest: a writer, a founder, a stranger with a story. No panel, no stage. Just a living room, a drink, and people disagreeing generously.',
-    seats: '10–14 seats',
-    meta: '10–14 seats · one question · phones stay in pockets',
-    imageLabel: 'Salon corner, low lamplight (3:2)',
-    detailImageLabel: 'Salon, living room, candlelight, mid-conversation (3:2)',
+      'Cocktails and conversation built around a beauty masterclass: a guest artist leads the room through techniques you can actually take home, then the evening opens into drinks that run long. Bigger than our usual table by design, curated so forty strangers leave as something closer to friends.',
+    seats: '35–40 guests',
+    meta: '35–40 guests · one masterclass · hosted with a guest artist',
+    imageLabel: 'Cocktails and makeup mirrors, low light (3:2)',
+    detailImageLabel: 'Self-makeup masterclass in progress (3:2)',
   },
   {
     slug: 'studio',
@@ -98,11 +100,11 @@ export const heroImage = {
 export const cerclesMeta = {
   title: 'The Cercles',
   description:
-    'The four formats OurCercle gathers around: the Chef’s Table, the Salon, the Studio and the Ritual.',
+    'The four formats OurCercle gathers around: the Chef’s Table, Sip & Glam, the Studio and the Ritual.',
   eyebrow: 'The Cercles',
   heading: 'Four rooms. One intention.',
   intro:
-    'Every Cercle is small by design, usually eight to fourteen seats, and curated so the room itself is the experience. The format just sets the table.',
+    'Every Cercle is curated so the room itself is the experience -- most nights eight to fourteen seats, occasionally a bigger room built the same way. The format just sets the table.',
   evening: {
     eyebrow: 'How it feels',
     heading: 'An evening, roughly.',
@@ -142,25 +144,24 @@ export interface UpcomingEvent {
 }
 
 /**
- * Upcoming gatherings. Chef's Table No. 1 remains illustrative. Sip & Glam is
- * real -- sourced from the client's own one-pager ("Cercle Sip & Glam.pdf"),
- * hosted with Mehwish Almas and timed to London Fashion Week -- but still
- * lacks a confirmed date and venue (the client's own draft still reads
- * "Cercle × [Restaurant]"), so the kicker stays seasonal rather than dated.
+ * Upcoming gatherings. Sip & Glam is real -- sourced from the client's own
+ * one-pager ("Cercle Sip & Glam.pdf"), hosted with Mehwish Almas and timed to
+ * London Fashion Week -- but still lacks a confirmed date and venue (the
+ * client's own draft still reads "Cercle × [Restaurant]"), so the kicker
+ * stays seasonal rather than dated. Salon No. 1 remains illustrative.
  */
 export const upcomingEvents: UpcomingEvent[] = [
-  {
-    slug: 'chefs-table-no-1',
-    kicker: 'Chef’s Table · October',
-    title: 'Chef’s Table No. 1',
-    blurb:
-      'Twelve seats, a five-course tasting, and a chef who’ll tell you where every dish began.',
-  },
   {
     slug: 'sip-and-glam',
     kicker: 'Sip & Glam · London Fashion Week',
     title: 'Sip & Glam, with Mehwish Almas',
     blurb:
       'Cocktails, a self-makeup masterclass with Mehwish Almas, and forty of London’s most interesting women in one room.',
+  },
+  {
+    slug: 'salon-no-1',
+    kicker: 'Salon · November',
+    title: 'Salon No. 1, “What are we optimising for?”',
+    blurb: 'Fourteen people, one question, and no right answer by design.',
   },
 ]
