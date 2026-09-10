@@ -141,14 +141,20 @@ export interface UpcomingEvent {
   blurb: string
 }
 
-/** Illustrative upcoming gatherings. Programme to be confirmed. */
+/**
+ * Upcoming gatherings. Sip & Glam is real -- sourced from the client's own
+ * one-pager ("Cercle Sip & Glam.pdf"), hosted with Mehwish Almas and timed to
+ * London Fashion Week -- but still lacks a confirmed date and venue (the
+ * client's own draft still reads "Cercle × [Restaurant]"), so the kicker
+ * stays seasonal rather than dated. Salon No. 1 remains illustrative.
+ */
 export const upcomingEvents: UpcomingEvent[] = [
   {
-    slug: 'chefs-table-no-1',
-    kicker: 'Chef’s Table · October',
-    title: 'Chef’s Table No. 1',
+    slug: 'sip-and-glam',
+    kicker: 'Sip & Glam · London Fashion Week',
+    title: 'Sip & Glam, with Mehwish Almas',
     blurb:
-      'Twelve seats, a five-course tasting, and a chef who’ll tell you where every dish began.',
+      'Cocktails, a self-makeup masterclass with Mehwish Almas, and forty of London’s most interesting women in one room.',
   },
   {
     slug: 'salon-no-1',
