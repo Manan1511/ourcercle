@@ -142,24 +142,25 @@ export interface UpcomingEvent {
 }
 
 /**
- * Upcoming gatherings. Sip & Glam is real -- sourced from the client's own
- * one-pager ("Cercle Sip & Glam.pdf"), hosted with Mehwish Almas and timed to
- * London Fashion Week -- but still lacks a confirmed date and venue (the
- * client's own draft still reads "Cercle × [Restaurant]"), so the kicker
- * stays seasonal rather than dated. Salon No. 1 remains illustrative.
+ * Upcoming gatherings. Chef's Table No. 1 remains illustrative. Sip & Glam is
+ * real -- sourced from the client's own one-pager ("Cercle Sip & Glam.pdf"),
+ * hosted with Mehwish Almas and timed to London Fashion Week -- but still
+ * lacks a confirmed date and venue (the client's own draft still reads
+ * "Cercle × [Restaurant]"), so the kicker stays seasonal rather than dated.
  */
 export const upcomingEvents: UpcomingEvent[] = [
+  {
+    slug: 'chefs-table-no-1',
+    kicker: 'Chef’s Table · October',
+    title: 'Chef’s Table No. 1',
+    blurb:
+      'Twelve seats, a five-course tasting, and a chef who’ll tell you where every dish began.',
+  },
   {
     slug: 'sip-and-glam',
     kicker: 'Sip & Glam · London Fashion Week',
     title: 'Sip & Glam, with Mehwish Almas',
     blurb:
       'Cocktails, a self-makeup masterclass with Mehwish Almas, and forty of London’s most interesting women in one room.',
-  },
-  {
-    slug: 'salon-no-1',
-    kicker: 'Salon · November',
-    title: 'Salon No. 1, “What are we optimising for?”',
-    blurb: 'Fourteen people, one question, and no right answer by design.',
   },
 ]
