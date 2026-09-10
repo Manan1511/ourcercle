@@ -1,4 +1,5 @@
 import Seo from '../components/Seo'
+import { upcomingEvents } from '../content/cercles'
 import {
   inviteForm,
   inviteMeta,
@@ -7,9 +8,30 @@ import {
   reassurance,
 } from '../content/invite'
 import { site } from '../content/site'
-import { Button, Card, Container, Eyebrow, Heading, Input, Section, Textarea } from '../ui'
+import {
+  Button,
+  Card,
+  Container,
+  Eyebrow,
+  Heading,
+  Input,
+  Section,
+  Select,
+  Textarea,
+} from '../ui'
 
 export default function Invite() {
+  // With one event on the calendar there's nothing to actually choose, so it
+  // selects itself; once there's more than one, the visitor picks (or leaves
+  // it open with the "no preference" option below).
+  const eventOptions =
+    upcomingEvents.length === 1
+      ? upcomingEvents.map((event) => ({ value: event.slug, label: event.title }))
+      : [
+          { value: '', label: inviteForm.eventNoPreferenceLabel },
+          ...upcomingEvents.map((event) => ({ value: event.slug, label: event.title })),
+        ]
+
   return (
     <>
       <Seo
@@ -58,6 +80,7 @@ export default function Invite() {
               hint={inviteForm.emailHint}
             />
             <Input label={inviteForm.cityLabel} name="city" autoComplete="address-level2" />
+            <Select label={inviteForm.eventLabel} name="event" options={eventOptions} />
             <Textarea
               label={inviteForm.aboutLabel}
               name="about"

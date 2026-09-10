@@ -30,6 +30,8 @@ export const inviteForm = {
   emailLabel: 'Email',
   emailHint: 'We only use this to reply, no newsletters unless you ask.',
   cityLabel: 'City',
+  eventLabel: 'Which Cercle?',
+  eventNoPreferenceLabel: 'No preference — whichever fits',
   aboutLabel: 'What draws you here?',
   aboutPlaceholder: 'A curiosity, a story, the kind of table you’d love to sit at…',
   submitLabel: 'Send my request',
