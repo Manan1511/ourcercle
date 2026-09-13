@@ -1,11 +1,17 @@
 /**
  * Journal — dispatches from past Cercles.
  *
- * DRAFT: every entry below is illustrative copy pending real write-ups, which
- * is why each carries `draft: true` and the index renders a "Draft entries"
- * badge. Entries have no detail route yet; `Full dispatch coming soon` is
- * rendered as disabled text rather than a dead link.
+ * `entries` is sourced from Supabase's `journal_entries` table (see the
+ * admin panel at /admin/journal), fetched at build time by
+ * scripts/fetch-content.mjs into src/content/generated/journal.ts -- edit
+ * entries there, not here. Illustrative placeholder copy (pending real
+ * write-ups) is marked per-entry via `draft: true`, which renders a "Draft
+ * entries" badge; that's separate from the DB's publish gate, which is what
+ * controls whether an entry ships in the build at all. Entries have no
+ * detail route yet; `Full dispatch coming soon` is rendered as disabled text
+ * rather than a dead link.
  */
+import { entries as generatedEntries } from './generated/journal'
 
 export interface JournalEntry {
   slug: string
@@ -35,32 +41,4 @@ export const journalMeta = {
   },
 }
 
-export const entries: JournalEntry[] = [
-  {
-    slug: 'the-dish-nobody-could-name',
-    format: "Chef's Table",
-    title: 'The dish nobody could name',
-    excerpt:
-      'On the fourth course, the table stopped talking for the first time all night, and then didn’t stop talking about it.',
-    imageLabel: 'Dispatch photo, table detail (3:2)',
-    draft: true,
-  },
-  {
-    slug: 'fourteen-strangers-one-question',
-    format: 'Salon',
-    title: 'Fourteen strangers, one question',
-    excerpt:
-      'We asked what people would unlearn if they could. A retired judge and a 24-year-old animator gave the same answer.',
-    imageLabel: 'Dispatch photo, salon corner (3:2)',
-    draft: true,
-  },
-  {
-    slug: 'bad-pottery-good-company',
-    format: 'Studio',
-    title: 'Bad pottery, good company',
-    excerpt:
-      'Nobody made anything worth keeping, which is exactly why everyone kept theirs.',
-    imageLabel: 'Dispatch photo, studio hands (3:2)',
-    draft: true,
-  },
-]
+export const entries: JournalEntry[] = generatedEntries

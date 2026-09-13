@@ -1,3 +1,4 @@
+import { useState, type FormEvent } from 'react'
 import Seo from '../components/Seo'
 import { upcomingEvents } from '../content/cercles'
 import {
@@ -8,6 +9,7 @@ import {
   reassurance,
 } from '../content/invite'
 import { site } from '../content/site'
+import { supabase } from '../lib/supabase'
 import {
   Button,
   Card,
@@ -19,6 +21,8 @@ import {
   Select,
   Textarea,
 } from '../ui'
+
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export default function Invite() {
   // With one event on the calendar there's nothing to actually choose, so it
@@ -32,13 +36,27 @@ export default function Invite() {
           ...upcomingEvents.map((event) => ({ value: event.slug, label: event.title })),
         ]
 
+  const [status, setStatus] = useState<Status>('idle')
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    setStatus('submitting')
+
+    const { error } = await supabase.from('invite_requests').insert({
+      name: String(data.get('name') ?? '').trim(),
+      email: String(data.get('email') ?? '').trim(),
+      city: String(data.get('city') ?? '').trim() || null,
+      event_slug: String(data.get('event') ?? '').trim() || null,
+      about: String(data.get('about') ?? '').trim() || null,
+    })
+
+    setStatus(error ? 'error' : 'success')
+  }
+
   return (
     <>
-      <Seo
-        title={inviteMeta.title}
-        description={inviteMeta.description}
-        path="/invite"
-      />
+      <Seo title={inviteMeta.title} description={inviteMeta.description} path="/invite" />
 
       <Section
         tone="canvas"
@@ -49,7 +67,8 @@ export default function Invite() {
           <div data-reveal className="flex flex-col gap-5">
             <Eyebrow>{inviteMeta.eyebrow}</Eyebrow>
             <Heading level={1} size="display">
-              {inviteMeta.heading} <em className="italic">{inviteMeta.headingEmphasis}</em>
+              {inviteMeta.heading}{' '}
+              <em className="italic">{inviteMeta.headingEmphasis}</em>
             </Heading>
             <p className="max-w-2xl text-lg leading-relaxed text-(--color-text-muted)">
               {inviteMeta.intro}
@@ -60,42 +79,83 @@ export default function Invite() {
 
       <Section tone="surface" bordered>
         <Container className="grid items-start gap-16 lg:grid-cols-[minmax(0,34rem)_minmax(0,26rem)]">
-          {/*
-            No submission backend yet -- the button is deliberately
-            type="button", not a real form action. Netlify Forms wiring is
-            tracked in the README's pre-launch checklist; don't fake a
-            success state ahead of that.
-          */}
-          <Card
-            tone="raised"
-            data-reveal
-            className="flex w-full flex-col gap-5.5 p-9"
-          >
-            <Input label={inviteForm.nameLabel} name="name" autoComplete="name" />
-            <Input
-              label={inviteForm.emailLabel}
-              name="email"
-              type="email"
-              autoComplete="email"
-              hint={inviteForm.emailHint}
-            />
-            <Input label={inviteForm.cityLabel} name="city" autoComplete="address-level2" />
-            <Select label={inviteForm.eventLabel} name="event" options={eventOptions} />
-            <Textarea
-              label={inviteForm.aboutLabel}
-              name="about"
-              rows={5}
-              placeholder={inviteForm.aboutPlaceholder}
-            />
-            <Button type="button" size="lg" className="w-full">
-              {inviteForm.submitLabel}
-            </Button>
-            <p className="text-xs leading-relaxed text-(--color-text-subtle)">
-              {inviteForm.disclaimer}
-            </p>
+          <Card tone="raised" data-reveal className="w-full p-0">
+            {status === 'success' ? (
+              <div className="flex flex-col gap-3 p-9 text-center">
+                <Heading level={2} size="md">
+                  {inviteForm.successHeading}
+                </Heading>
+                <p className="text-[0.9375rem] leading-relaxed text-(--color-text-muted)">
+                  {inviteForm.successBody}
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5.5 p-9">
+                <Input
+                  label={inviteForm.nameLabel}
+                  name="name"
+                  autoComplete="name"
+                  required
+                  disabled={status === 'submitting'}
+                />
+                <Input
+                  label={inviteForm.emailLabel}
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  hint={inviteForm.emailHint}
+                  required
+                  disabled={status === 'submitting'}
+                />
+                <Input
+                  label={inviteForm.cityLabel}
+                  name="city"
+                  autoComplete="address-level2"
+                  disabled={status === 'submitting'}
+                />
+                <Select
+                  label={inviteForm.eventLabel}
+                  name="event"
+                  options={eventOptions}
+                  disabled={status === 'submitting'}
+                />
+                <Textarea
+                  label={inviteForm.aboutLabel}
+                  name="about"
+                  rows={5}
+                  placeholder={inviteForm.aboutPlaceholder}
+                  disabled={status === 'submitting'}
+                />
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full"
+                  disabled={status === 'submitting'}
+                >
+                  {status === 'submitting'
+                    ? inviteForm.submittingLabel
+                    : inviteForm.submitLabel}
+                </Button>
+                {status === 'error' && (
+                  <p
+                    role="alert"
+                    className="text-xs leading-relaxed text-(--color-danger)"
+                  >
+                    {inviteForm.errorMessage}
+                  </p>
+                )}
+                <p className="text-xs leading-relaxed text-(--color-text-subtle)">
+                  {inviteForm.disclaimer}
+                </p>
+              </form>
+            )}
           </Card>
 
-          <aside aria-label="What happens next" data-reveal className="flex flex-col gap-7">
+          <aside
+            aria-label="What happens next"
+            data-reveal
+            className="flex flex-col gap-7"
+          >
             <Heading level={2} size="lg">
               {nextStepsMeta.heading}
             </Heading>

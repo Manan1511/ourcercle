@@ -8,10 +8,10 @@
  * (warm, side-by-side, reassurance shown), which is what a first-time
  * visitor would actually see.
  *
- * There is no submission backend yet: the design itself renders the submit
- * control as an inert `type="button"`, not a real form action. Netlify
- * Forms wiring is tracked separately in the README's pre-launch checklist --
- * don't add a fake success/error flow here without it.
+ * The form submits to Supabase (see src/lib/supabase.ts and the
+ * `invite_requests` table) -- an earlier draft of this comment pointed at
+ * Netlify Forms; that plan was superseded once the admin panel needed a real
+ * database anyway.
  */
 
 export const inviteMeta = {
@@ -35,6 +35,11 @@ export const inviteForm = {
   aboutLabel: 'What draws you here?',
   aboutPlaceholder: 'A curiosity, a story, the kind of table you’d love to sit at…',
   submitLabel: 'Send my request',
+  submittingLabel: 'Sending…',
+  successHeading: 'Request sent.',
+  successBody:
+    'We read every one ourselves. If a room needs exactly you, you’ll hear from us.',
+  errorMessage: 'Something went wrong sending that. Please try again in a moment.',
   disclaimer:
     'By requesting an invite you agree to hear from us about your request. Nothing else, ever.',
 }

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite-react-ssg build",
+    "build": "node scripts/fetch-content.mjs && tsc -b && vite-react-ssg build",
+    "fetch-content": "node scripts/fetch-content.mjs",
     "preview": "vite preview",
     "lint": "oxlint",
     "format": "prettier --write .",
@@ -14,6 +15,7 @@
     "build:ds": "vite build --config vite.config.ds.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
     "clsx": "^2.1.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
