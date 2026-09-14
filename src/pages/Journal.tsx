@@ -61,11 +61,6 @@ export default function Journal() {
                   <p className="text-[0.9375rem] leading-relaxed text-(--color-text-muted)">
                     {entry.excerpt}
                   </p>
-                  {/* No detail route exists yet, so this is deliberately text
-                      rather than a link -- a dead <a> would be worse. */}
-                  <p className="text-sm text-(--color-text-subtle)">
-                    Full dispatch coming soon
-                  </p>
                 </article>
               </li>
             ))}
