@@ -35,6 +35,12 @@ export const formats = [
     meta: '35–40 guests · one masterclass · hosted with a guest artist',
     imageLabel: 'Cocktails and makeup mirrors, low light (3:2)',
     detailImageLabel: 'Self-makeup masterclass in progress (3:2)',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-card.jpg',
+    imageAlt: 'A round of cocktails raised together by candlelight',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-detail.jpg',
+    detailImageAlt: 'Coupe glasses clinked together over a candlelit table',
   },
   {
     slug: 'tipsy-table',
@@ -47,6 +53,13 @@ export const formats = [
     meta: 'Cocktails included · come as you are',
     imageLabel: 'Cocktails mid-pour, table candlelight (3:2)',
     detailImageLabel: 'Tipsy Table, cocktails and laughter, low light (3:2)',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-card.jpg',
+    imageAlt: 'A candlelit table mid-conversation, motion and warmth',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-detail.jpg',
+    detailImageAlt:
+      'A long candlelit table under arched windows, guests mid-conversation',
   },
   {
     slug: 'indian-aperitivo',
@@ -59,5 +72,11 @@ export const formats = [
     meta: 'Small plates · standing and seated',
     imageLabel: 'Spiced small plates and spritz, golden hour (3:2)',
     detailImageLabel: 'Indian Apéritivo spread, chaat and cocktails (3:2)',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-card.jpg',
+    imageAlt: 'Small plates and drinks laid out on a table',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-detail.jpg',
+    detailImageAlt: 'A box of individual tarts and small bites, hand reaching in',
   },
 ]

@@ -22,6 +22,9 @@ export const entries = [
     excerpt:
       'We asked what people would unlearn if they could. A retired judge and a 24-year-old animator gave the same answer.',
     imageLabel: 'Dispatch photo, salon corner (3:2)',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/journal-salon.jpg',
+    imageAlt: 'A host lighting candles at a long table, silhouetted against warm light',
     draft: true,
   },
   {
