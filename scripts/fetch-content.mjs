@@ -99,7 +99,7 @@ const formats = await fetchTable('cercle_formats', (row) => ({
   name: row.name,
   blurb: row.blurb,
   description: row.description,
-  seats: row.seats,
+  ...(row.seats ? { seats: row.seats } : {}),
   meta: row.meta,
   imageLabel: row.image_label ?? '',
   detailImageLabel: row.detail_image_label ?? '',

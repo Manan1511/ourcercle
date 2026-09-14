@@ -171,7 +171,7 @@ function FormatForm({
       name: text('name'),
       blurb: text('blurb'),
       description: text('description'),
-      seats: text('seats'),
+      seats: text('seats') || null,
       meta: text('meta'),
       image_url: text('image_url') || null,
       image_alt: text('image_alt') || null,
@@ -239,10 +239,9 @@ function FormatForm({
         />
         <div className="grid gap-4 sm:grid-cols-2">
           <Input
-            label="Seats (short badge)"
+            label="Seats (short badge, leave blank to hide)"
             name="seats"
-            defaultValue={row?.seats}
-            required
+            defaultValue={row?.seats ?? ''}
             disabled={saving}
           />
           <Input

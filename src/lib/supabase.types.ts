@@ -30,7 +30,7 @@ export type Database = {
           meta: string
           name: string
           number: string
-          seats: string
+          seats: string | null
           slug: string
           sort_order: number
           updated_at: string
@@ -50,7 +50,7 @@ export type Database = {
           meta: string
           name: string
           number: string
-          seats: string
+          seats?: string | null
           slug: string
           sort_order?: number
           updated_at?: string
@@ -70,7 +70,7 @@ export type Database = {
           meta?: string
           name?: string
           number?: string
-          seats?: string
+          seats?: string | null
           slug?: string
           sort_order?: number
           updated_at?: string

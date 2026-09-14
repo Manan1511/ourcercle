@@ -11,8 +11,7 @@ export const formats = [
       'One long table, one kitchen cooking in front of you, and a menu built for the conversation rather than the photograph.',
     description:
       "A dozen strangers around one table, a chef cooking within arm's reach, and courses that arrive with their stories. The menu is a surprise; the seating is not, it's the most deliberate thing in the room.",
-    seats: '8–12 seats',
-    meta: '8–12 seats · one evening · dietary needs asked for in advance',
+    meta: 'One evening · dietary needs asked for in advance',
     imageLabel: 'Chef plating at the pass (3:2)',
     detailImageLabel: "Chef's table, plating under low light (3:2)",
   },
@@ -37,8 +36,7 @@ export const formats = [
       'A round of cocktails, a lighter question than usual, and a table that gets looser as the night goes on.',
     description:
       'Less ceremony than the others: a rotating round of drinks, a looser guest list, and conversation that gets more honest by the second cocktail. The Cercle for a Tuesday that needed one good excuse.',
-    seats: '10–16 seats',
-    meta: '10–16 seats · cocktails included · come as you are',
+    meta: 'Cocktails included · come as you are',
     imageLabel: 'Cocktails mid-pour, table candlelight (3:2)',
     detailImageLabel: 'Tipsy Table, cocktails and laughter, low light (3:2)',
   },
@@ -50,8 +48,7 @@ export const formats = [
       'Spiced small plates, something sparkling, and the aperitivo hour reimagined with an Indian pantry.',
     description:
       "The Italian aperitivo hour, retold: chaat and pakoras instead of olives and crisps, a spiced spritz in hand, and the kind of grazing that turns strangers into a table before anyone's properly sat down.",
-    seats: '12–18 seats',
-    meta: '12–18 seats · small plates · standing and seated',
+    meta: 'Small plates · standing and seated',
     imageLabel: 'Spiced small plates and spritz, golden hour (3:2)',
     detailImageLabel: 'Indian Apéritivo spread, chaat and cocktails (3:2)',
   },

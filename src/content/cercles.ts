@@ -22,9 +22,13 @@ export interface CercleFormat {
   name: string
   blurb: string
   description: string
-  /** Short badge form, e.g. "8-12 seats". Shown on the homepage card. */
-  seats: string
-  /** Full detail line, e.g. "8-12 seats · one evening · ...". Shown on /cercles. */
+  /**
+   * Short capacity badge, e.g. "8-12 seats", on the homepage card. Only
+   * Sip & Glam London shows one -- the others deliberately omit capacity, so
+   * this is optional and the card leaves the line out when absent.
+   */
+  seats?: string
+  /** Full detail line, e.g. "one evening · dietary needs asked for in advance". Shown on /cercles. */
   meta: string
   imageLabel: string
   detailImageLabel: string

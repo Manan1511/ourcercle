@@ -84,9 +84,11 @@ export default function Home() {
                       <p className="text-sm leading-relaxed text-(--color-text-muted)">
                         {format.blurb}
                       </p>
-                      <p className="mt-1 text-xs tracking-[0.14em] uppercase text-(--color-text-subtle)">
-                        {format.seats}
-                      </p>
+                      {format.seats && (
+                        <p className="mt-1 text-xs tracking-[0.14em] uppercase text-(--color-text-subtle)">
+                          {format.seats}
+                        </p>
+                      )}
                     </div>
                   </Card>
                 </Link>
