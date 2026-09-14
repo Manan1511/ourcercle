@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react'
 import Seo from '../components/Seo'
 import { entries, journalMeta } from '../content/journal'
 import { site } from '../content/site'
-import { Badge, Button, Container, Eyebrow, Heading, ImageSlot, Section } from '../ui'
+import { Button, Container, Eyebrow, Heading, ImageSlot, Section } from '../ui'
 
 export default function Journal() {
   return (
@@ -20,11 +20,7 @@ export default function Journal() {
       >
         <Container>
           <div data-reveal className="flex flex-col gap-5">
-            <div className="flex flex-wrap items-center gap-4">
-              <Eyebrow>{journalMeta.eyebrow}</Eyebrow>
-              {/* Remove once the entries below are real write-ups. */}
-              <Badge>{journalMeta.badge}</Badge>
-            </div>
+            <Eyebrow>{journalMeta.eyebrow}</Eyebrow>
             <Heading level={1} size="display">
               {journalMeta.heading}
             </Heading>
@@ -53,7 +49,6 @@ export default function Journal() {
                   />
                   <p className="text-[0.8125rem] tracking-[0.14em] uppercase text-(--color-text-subtle)">
                     {entry.format}
-                    {entry.draft && ' · Draft'}
                   </p>
                   <Heading level={2} size="md" className="text-[1.6rem] leading-tight">
                     {entry.title}
