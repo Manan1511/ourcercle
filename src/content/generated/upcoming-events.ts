@@ -10,10 +10,4 @@ export const upcomingEvents = [
     blurb:
       "Cocktails, a self-makeup masterclass with Mehwish Almas, and forty of London's most interesting women in one room.",
   },
-  {
-    slug: 'salon-no-1',
-    kicker: 'Salon · November',
-    title: 'Salon No. 1, "What are we optimising for?"',
-    blurb: 'Fourteen people, one question, and no right answer by design.',
-  },
 ]

@@ -19,7 +19,7 @@ export const formats = [
   {
     slug: 'sip-and-glam',
     number: 'No. 2',
-    name: 'Sip & Glam',
+    name: 'Sip & Glam London',
     blurb:
       "Cocktails, an interactive self-makeup masterclass with a guest artist, and forty of London's most interesting people in one room.",
     description:
@@ -30,29 +30,29 @@ export const formats = [
     detailImageLabel: 'Self-makeup masterclass in progress (3:2)',
   },
   {
-    slug: 'studio',
+    slug: 'tipsy-table',
     number: 'No. 3',
-    name: 'The Studio',
+    name: 'The Tipsy Table',
     blurb:
-      'Hands busy, guard down. Making something badly together turns out to be an unusually good introduction.',
+      'A round of cocktails, a lighter question than usual, and a table that gets looser as the night goes on.',
     description:
-      "Art and culture with your sleeves rolled up: a ceramicist's wheel, a printmaker's press, a gallery after hours. Making something imperfect next to someone you've just met is a faster route to friendship than small talk ever was.",
-    seats: '8–12 seats',
-    meta: '8–12 seats · materials provided · no experience expected',
-    imageLabel: 'Hands working at a studio bench (3:2)',
-    detailImageLabel: 'Studio, hands working with clay, paint or print (3:2)',
+      'Less ceremony than the others: a rotating round of drinks, a looser guest list, and conversation that gets more honest by the second cocktail. The Cercle for a Tuesday that needed one good excuse.',
+    seats: '10–16 seats',
+    meta: '10–16 seats · cocktails included · come as you are',
+    imageLabel: 'Cocktails mid-pour, table candlelight (3:2)',
+    detailImageLabel: 'Tipsy Table, cocktails and laughter, low light (3:2)',
   },
   {
-    slug: 'ritual',
+    slug: 'indian-aperitivo',
     number: 'No. 4',
-    name: 'The Ritual',
+    name: 'Indian Apéritivo',
     blurb:
-      'Slower and quieter: tea, scent, sound. An hour that asks nothing of you except that you arrive.',
+      'Spiced small plates, something sparkling, and the aperitivo hour reimagined with an Indian pantry.',
     description:
-      'Beauty, rest and small ceremonies: a tea master, a perfumer, an evening of scent and silence and slow conversation. The Cercle for weeks that have been too loud.',
-    seats: '6–10 seats',
-    meta: '6–10 seats · unhurried by design',
-    imageLabel: 'Tea and ceramics still life (3:2)',
-    detailImageLabel: 'Ritual, tea, scent, still life in warm light (3:2)',
+      "The Italian aperitivo hour, retold: chaat and pakoras instead of olives and crisps, a spiced spritz in hand, and the kind of grazing that turns strangers into a table before anyone's properly sat down.",
+    seats: '12–18 seats',
+    meta: '12–18 seats · small plates · standing and seated',
+    imageLabel: 'Spiced small plates and spritz, golden hour (3:2)',
+    detailImageLabel: 'Indian Apéritivo spread, chaat and cocktails (3:2)',
   },
 ]

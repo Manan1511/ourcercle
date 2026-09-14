@@ -47,7 +47,7 @@ export const heroImage = {
 export const cerclesMeta = {
   title: 'The Cercles',
   description:
-    'The four formats OurCercle gathers around: the Chef’s Table, Sip & Glam, the Studio and the Ritual.',
+    'The four formats OurCercle gathers around: the Chef’s Table, Sip & Glam London, the Tipsy Table and Indian Apéritivo.',
   eyebrow: 'The Cercles',
   heading: 'Four rooms. One intention.',
   intro:
