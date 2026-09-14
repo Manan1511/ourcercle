@@ -16,24 +16,28 @@ export const entries = [
     draft: true,
   },
   {
-    slug: 'fourteen-strangers-one-question',
-    format: 'Salon',
-    title: 'Fourteen strangers, one question',
+    slug: 'the-toast-that-kept-going',
+    format: 'Tipsy Table',
+    title: 'The toast that kept going',
     excerpt:
-      'We asked what people would unlearn if they could. A retired judge and a 24-year-old animator gave the same answer.',
-    imageLabel: 'Dispatch photo, salon corner (3:2)',
+      "Nobody remembers who started it, only that the room kept raising a glass to strangers who'd been strangers an hour earlier.",
+    imageLabel: 'Dispatch photo, cocktails and candlelight (3:2)',
     image:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/journal-salon.jpg',
-    imageAlt: 'A host lighting candles at a long table, silhouetted against warm light',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/journal-tipsy-table.jpg',
+    imageAlt:
+      'A floral centrepiece with lit candles and a coupe of olives on a wooden table',
     draft: true,
   },
   {
-    slug: 'bad-pottery-good-company',
-    format: 'Studio',
-    title: 'Bad pottery, good company',
+    slug: 'snacks-first-names-later',
+    format: 'Indian Apéritivo',
+    title: 'Snacks first, names later',
     excerpt:
-      'Nobody made anything worth keeping, which is exactly why everyone kept theirs.',
-    imageLabel: 'Dispatch photo, studio hands (3:2)',
+      'Everyone reached for the same small plate at once. By the third round, reaching for it together felt like the whole point.',
+    imageLabel: 'Dispatch photo, small plates and candlelight (3:2)',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/journal-indian-aperitivo.jpg',
+    imageAlt: 'Small dessert glasses and lit candles down a long table',
     draft: true,
   },
 ]
