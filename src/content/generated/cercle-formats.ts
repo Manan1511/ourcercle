@@ -15,13 +15,13 @@ export const formats = [
     imageLabel: 'Chef plating at the pass (3:2)',
     detailImageLabel: "Chef's table, plating under low light (3:2)",
     image:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-card.jpg',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-card-2.jpg',
     imageAlt:
-      'Candlelit long table set for a Cercle dinner, roses and taper candles down the centre',
+      'A bottle of Jigger Shots beside roses and a lit candle, a guest laughing in the background',
     detailImage:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-detail.jpg',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-detail-2.jpg',
     detailImageAlt:
-      'A "Palette to Plate" Cercle event sign in a hallway, guests seated at the table beyond',
+      'A long candlelit table set with roses, guests seated in conversation',
   },
   {
     slug: 'sip-and-glam',
@@ -36,11 +36,12 @@ export const formats = [
     imageLabel: 'Cocktails and makeup mirrors, low light (3:2)',
     detailImageLabel: 'Self-makeup masterclass in progress (3:2)',
     image:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-card.jpg',
-    imageAlt: 'A round of cocktails raised together by candlelight',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-card.jpg',
+    imageAlt: 'A blurred, candlelit bar scene full of motion and conversation',
     detailImage:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-detail.jpg',
-    detailImageAlt: 'Coupe glasses clinked together over a candlelit table',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/journal-salon.jpg',
+    detailImageAlt:
+      'A host lighting candles at a long table, silhouetted against warm light',
   },
   {
     slug: 'tipsy-table',
@@ -54,12 +55,11 @@ export const formats = [
     imageLabel: 'Cocktails mid-pour, table candlelight (3:2)',
     detailImageLabel: 'Tipsy Table, cocktails and laughter, low light (3:2)',
     image:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-card.jpg',
-    imageAlt: 'A candlelit table mid-conversation, motion and warmth',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-card.jpg',
+    imageAlt: 'A round of cocktails raised together by candlelight',
     detailImage:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-detail.jpg',
-    detailImageAlt:
-      'A long candlelit table under arched windows, guests mid-conversation',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-detail.jpg',
+    detailImageAlt: 'Coupe glasses clinked together over a candlelit table',
   },
   {
     slug: 'indian-aperitivo',
@@ -73,10 +73,11 @@ export const formats = [
     imageLabel: 'Spiced small plates and spritz, golden hour (3:2)',
     detailImageLabel: 'Indian Apéritivo spread, chaat and cocktails (3:2)',
     image:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-card.jpg',
-    imageAlt: 'Small plates and drinks laid out on a table',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-detail.jpg',
+    imageAlt: 'A long candlelit table under arched windows, guests mid-conversation',
     detailImage:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-detail.jpg',
-    detailImageAlt: 'A box of individual tarts and small bites, hand reaching in',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/outdoor-floral.jpg',
+    detailImageAlt:
+      'An outdoor table dressed with colourful flowers and candlelight at night',
   },
 ]
