@@ -17,3 +17,10 @@ dist-ds/
 .design-sync/.cache/
 .design-sync/learnings/
 .design-sync/node_modules
+
+# Local photo pool -- raw source photography and its optimized-but-not-yet-
+# uploaded working copies. Never committed; the images actually used on the
+# site are hosted in Supabase Storage instead. Keep the raw pool intact,
+# don't delete from it.
+/photos/
+/photos-optimized/
