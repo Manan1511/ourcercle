@@ -36,9 +36,13 @@ export default function Input({
 
   return (
     <div className="flex flex-col gap-1.5">
+      {/* No explicit text colour: inherits from the ground (body's cream by
+          default, or a cream Card's on-primary override), the same way
+          Section's cream mechanism works. Hardcoding --color-text here would
+          stay cream even inside a cream Card and go invisible. */}
       <label
         htmlFor={id}
-        className={cn('text-sm font-medium text-(--color-text)', hideLabel && 'sr-only')}
+        className={cn('text-sm font-medium', hideLabel && 'sr-only')}
       >
         {label}
         {props.required && (

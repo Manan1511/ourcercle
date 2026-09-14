@@ -38,9 +38,10 @@ export default function Textarea({
 
   return (
     <div className="flex flex-col gap-1.5">
+      {/* No explicit text colour: inherits from the ground, see Input.tsx. */}
       <label
         htmlFor={id}
-        className={cn('text-sm font-medium text-(--color-text)', hideLabel && 'sr-only')}
+        className={cn('text-sm font-medium', hideLabel && 'sr-only')}
       >
         {label}
         {props.required && (

@@ -79,7 +79,7 @@ export default function Invite() {
 
       <Section tone="surface" bordered>
         <Container className="grid items-start gap-16 lg:grid-cols-[minmax(0,34rem)_minmax(0,26rem)]">
-          <Card tone="raised" data-reveal className="w-full p-0">
+          <Card tone="cream" data-reveal className="w-full p-0">
             {status === 'success' ? (
               <div className="flex flex-col gap-3 p-9 text-center">
                 <Heading level={2} size="md">
@@ -128,6 +128,7 @@ export default function Invite() {
                 />
                 <Button
                   type="submit"
+                  variant="accent"
                   size="lg"
                   className="w-full"
                   disabled={status === 'submitting'}
