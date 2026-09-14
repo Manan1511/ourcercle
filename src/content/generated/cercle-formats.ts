@@ -14,6 +14,14 @@ export const formats = [
     meta: 'One evening · dietary needs asked for in advance',
     imageLabel: 'Chef plating at the pass (3:2)',
     detailImageLabel: "Chef's table, plating under low light (3:2)",
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-card.jpg',
+    imageAlt:
+      'Candlelit long table set for a Cercle dinner, roses and taper candles down the centre',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-detail.jpg',
+    detailImageAlt:
+      'A "Palette to Plate" Cercle event sign in a hallway, guests seated at the table beyond',
   },
   {
     slug: 'sip-and-glam',

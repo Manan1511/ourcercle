@@ -38,9 +38,13 @@ export default function Home() {
               </Button>
             )}
           </div>
-          {/* Portrait hero photograph, still outstanding. */}
           <div data-reveal style={{ '--reveal-delay': '120ms' } as CSSProperties}>
-            <ImageSlot ratio={heroImage.ratio} label={heroImage.label} />
+            <ImageSlot
+              ratio={heroImage.ratio}
+              label={heroImage.label}
+              src={heroImage.src}
+              alt={heroImage.alt}
+            />
           </div>
         </Container>
       </Section>

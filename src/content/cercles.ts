@@ -41,10 +41,14 @@ export interface CercleFormat {
 
 export const formats: CercleFormat[] = generatedFormats
 
-/** Photography brief for the homepage hero. */
+/** Homepage hero photography. Not part of the admin-managed content tables
+ *  (it's a single site-wide image, not a repeatable list) -- swap by editing
+ *  this object directly. */
 export const heroImage = {
   label: 'Candlelit table mid-conversation (4:5)',
   ratio: '4 / 5',
+  src: 'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/home-hero.jpg',
+  alt: 'Guests raising a toast around a candlelit Cercle dinner table',
 }
 
 /** Copy for /cercles outside of the per-format sections. */

@@ -10,6 +10,9 @@ export const entries = [
     excerpt:
       "On the fourth course, the table stopped talking for the first time all night, and then didn't stop talking about it.",
     imageLabel: 'Dispatch photo, table detail (3:2)',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-journal.jpg',
+    imageAlt: 'Guests mid-meal at a candlelit Cercle dinner table',
     draft: true,
   },
   {
