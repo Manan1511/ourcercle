@@ -1,10 +1,45 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import Intro from '../components/Intro'
 import Seo from '../components/Seo'
 import { heroImage, pastEvents } from '../content/cercles'
 import { home } from '../content/pages'
 import { site } from '../content/site'
-import { Button, Card, Container, Eyebrow, Heading, ImageSlot, Section } from '../ui'
+import { Button, Container, Eyebrow, Heading, ImageSlot, Section } from '../ui'
+
+/**
+ * One icon per "why join" reason, in the order they're defined in
+ * content/pages.ts. Kept here rather than in the content file since these
+ * are presentation, not copy -- simple line marks in the same thin-stroke,
+ * currentColor style as Logo, so they inherit whatever text colour the
+ * ground gives them.
+ */
+const WHY_JOIN_ICONS: ReactNode[] = [
+  // Meet outside your circle -- two overlapping circles.
+  <svg key="circles" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <circle cx="11" cy="14" r="8" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="17" cy="14" r="8" stroke="currentColor" strokeWidth="1.5" />
+  </svg>,
+  // Conversation, not networking -- a speech bubble.
+  <svg key="bubble" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <path
+      d="M5 8.5a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-8.5L7 22v-3.5H8a3 3 0 0 1-3-3v-7Z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    />
+  </svg>,
+  // Small by design -- a small round table, seats marked around it.
+  <svg key="table" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <circle cx="14" cy="14" r="7" stroke="currentColor" strokeWidth="1.5" />
+    <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+      <line x1="14" y1="1.5" x2="14" y2="4.5" />
+      <line x1="25" y1="7.75" x2="22.4" y2="9.25" />
+      <line x1="25" y1="20.25" x2="22.4" y2="18.75" />
+      <line x1="3" y1="7.75" x2="5.6" y2="9.25" />
+      <line x1="3" y1="20.25" x2="5.6" y2="18.75" />
+    </g>
+  </svg>,
+]
 
 export default function Home() {
   return (
@@ -64,8 +99,9 @@ export default function Home() {
                 key={reason.title}
                 data-reveal
                 style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
-                className="flex flex-col gap-3 border-t border-(--color-border) pt-5"
+                className="flex flex-col gap-4 border-t border-(--color-border) pt-5"
               >
+                <div className="h-7 w-7 text-(--color-accent)">{WHY_JOIN_ICONS[i]}</div>
                 <Heading level={3} size="lg">
                   {reason.title}
                 </Heading>
@@ -91,47 +127,37 @@ export default function Home() {
           <p className="mt-4 max-w-2xl text-(--color-text-muted)">
             {home.pastEvents.intro}
           </p>
-
-          {/* minmax caps at a fixed width, not 1fr -- with only one past
-              event (today's reality), 1fr would stretch that single card to
-              the full row width instead of a normal card size. */}
-          <ul className="mt-12 grid list-none grid-cols-[repeat(auto-fit,minmax(15rem,20rem))] gap-6">
-            {pastEvents.map((event, i) => (
-              <li
-                key={event.slug}
-                data-reveal
-                style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
-              >
-                <Card
-                  tone="raised"
-                  interactive
-                  className="flex h-full flex-col gap-4 overflow-hidden p-0"
-                >
-                  <ImageSlot
-                    ratio="3 / 2"
-                    src={event.image}
-                    alt={event.imageAlt}
-                    label={event.imageLabel}
-                    className="rounded-none"
-                  />
-                  <div className="flex flex-col gap-2 p-6 pt-0">
-                    {event.kicker && (
-                      <p className="text-xs tracking-[0.14em] text-(--color-text-subtle) uppercase">
-                        {event.kicker}
-                      </p>
-                    )}
-                    <Heading level={3} size="md">
-                      {event.name}
-                    </Heading>
-                    <p className="text-sm leading-relaxed text-(--color-text-muted)">
-                      {event.blurb}
-                    </p>
-                  </div>
-                </Card>
-              </li>
-            ))}
-          </ul>
         </Container>
+
+        {/* A full image+copy block per past event, not a small card --
+            with only one so far, a card in a grid just left a lot of the
+            row empty. This fills the space properly and scales the same
+            way as it grows into a real list. */}
+        {pastEvents.map((event, i) => (
+          <Container key={event.slug} className="mt-12">
+            <div
+              data-reveal
+              style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
+              className="grid items-center gap-14 lg:grid-cols-2"
+            >
+              <ImageSlot
+                ratio="3 / 2"
+                src={event.image}
+                alt={event.imageAlt}
+                label={event.imageLabel}
+              />
+              <div className="flex flex-col items-start gap-4">
+                {event.kicker && <Eyebrow>{event.kicker}</Eyebrow>}
+                <Heading level={3} size="xl">
+                  {event.name}
+                </Heading>
+                <p className="text-lg leading-relaxed text-(--color-text-muted)">
+                  {event.blurb}
+                </p>
+              </div>
+            </div>
+          </Container>
+        ))}
       </Section>
 
       <Section tone="alt">
