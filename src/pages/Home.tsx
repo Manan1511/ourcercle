@@ -68,12 +68,17 @@ export default function Home() {
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-4">
               {home.hero.cta && (
-                <Button to={home.hero.cta.href} size="lg">
+                <Button to={home.hero.cta.href} size="lg" className="w-64 justify-center">
                   {home.hero.cta.label}
                 </Button>
               )}
-              <Button to="/cercles" variant="outline" size="lg">
-                See what&rsquo;s coming up
+              <Button
+                to="/cercles"
+                variant="outline"
+                size="lg"
+                className="w-64 justify-center"
+              >
+                Explore upcoming Cercles
               </Button>
             </div>
           </div>
