@@ -66,11 +66,16 @@ export default function Home() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-(--color-text-muted)">
               {home.hero.body}
             </p>
-            {home.hero.cta && (
-              <Button to={home.hero.cta.href} size="lg" className="mt-9">
-                {home.hero.cta.label}
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              {home.hero.cta && (
+                <Button to={home.hero.cta.href} size="lg">
+                  {home.hero.cta.label}
+                </Button>
+              )}
+              <Button to="/cercles" variant="outline" size="lg">
+                See what&rsquo;s coming up
               </Button>
-            )}
+            </div>
           </div>
           <div data-reveal style={{ '--reveal-delay': '120ms' } as CSSProperties}>
             <ImageSlot
@@ -154,7 +159,7 @@ export default function Home() {
                 <p className="text-lg leading-relaxed text-(--color-text-muted)">
                   {event.blurb}
                 </p>
-                <Button to={`/cercles/${event.slug}`} variant="ghost" className="mt-1">
+                <Button to={`/cercles/${event.slug}`} className="mt-1">
                   More about this Cercle
                 </Button>
               </div>

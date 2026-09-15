@@ -70,7 +70,7 @@ export default function Cercles() {
               )}
               <div className="mt-2 flex flex-wrap items-center gap-4">
                 <Button to={site.cta.href}>Request a seat</Button>
-                <Button to={`/cercles/${event.slug}`} variant="ghost">
+                <Button to={`/cercles/${event.slug}`} variant="outline">
                   More about this Cercle
                 </Button>
               </div>
