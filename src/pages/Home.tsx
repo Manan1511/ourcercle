@@ -3,6 +3,7 @@ import Intro from '../components/Intro'
 import Seo from '../components/Seo'
 import { heroImage, pastEvents } from '../content/cercles'
 import { home } from '../content/pages'
+import { site } from '../content/site'
 import { Button, Card, Container, Eyebrow, Heading, ImageSlot, Section } from '../ui'
 
 export default function Home() {
@@ -47,18 +48,48 @@ export default function Home() {
         </Container>
       </Section>
 
+      <Section tone="surface" bordered>
+        <Container>
+          <div data-reveal className="flex flex-col gap-4">
+            <Eyebrow>{home.whyJoin.eyebrow}</Eyebrow>
+            <Heading level={2} size="xl" className="max-w-2xl">
+              {home.whyJoin.heading}
+            </Heading>
+            <p className="max-w-2xl text-(--color-text-muted)">{home.whyJoin.intro}</p>
+          </div>
+
+          <ul className="mt-14 grid list-none grid-cols-[repeat(auto-fit,minmax(16.25rem,1fr))] gap-10">
+            {home.whyJoin.reasons.map((reason, i) => (
+              <li
+                key={reason.title}
+                data-reveal
+                style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
+                className="flex flex-col gap-3 border-t border-(--color-border) pt-5"
+              >
+                <Heading level={3} size="lg">
+                  {reason.title}
+                </Heading>
+                <p className="text-[0.9375rem] leading-relaxed text-(--color-text-muted)">
+                  {reason.body}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
+
       {/* There's no fixed catalogue of formats -- each Cercle is its own
           event. This is a record of the ones that have actually happened,
           not a menu of options; currently just Palette to Plate, with room
           to grow into a real list. */}
-      <Section tone="surface" bordered>
+      <Section tone="canvas" bordered>
         <Container>
-          <Eyebrow>So far</Eyebrow>
+          <Eyebrow>{home.pastEvents.eyebrow}</Eyebrow>
           <Heading level={2} size="xl" className="mt-3 max-w-2xl">
-            One room, so far.
+            {home.pastEvents.heading}
           </Heading>
           <p className="mt-4 max-w-2xl text-(--color-text-muted)">
-            Every Cercle is its own evening. Here's the one that's actually happened.
+            {home.pastEvents.intro}
           </p>
 
           <ul className="mt-12 grid list-none grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-6">
@@ -104,10 +135,10 @@ export default function Home() {
         <Container width="prose">
           <div data-reveal className="flex flex-col items-center gap-7 text-center">
             <Heading level={2} size="xl">
-              Explore our upcoming events
+              There is a seat at the next one.
             </Heading>
-            <Button to="/cercles" variant="accent" size="lg">
-              See what's next
+            <Button to={site.cta.href} variant="accent" size="lg">
+              {site.cta.label}
             </Button>
           </div>
         </Container>
