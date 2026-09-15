@@ -92,7 +92,10 @@ export default function Home() {
             {home.pastEvents.intro}
           </p>
 
-          <ul className="mt-12 grid list-none grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-6">
+          {/* minmax caps at a fixed width, not 1fr -- with only one past
+              event (today's reality), 1fr would stretch that single card to
+              the full row width instead of a normal card size. */}
+          <ul className="mt-12 grid list-none grid-cols-[repeat(auto-fit,minmax(15rem,20rem))] gap-6">
             {pastEvents.map((event, i) => (
               <li
                 key={event.slug}
