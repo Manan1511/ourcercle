@@ -68,9 +68,12 @@ export default function Cercles() {
                   {event.meta}
                 </p>
               )}
-              <Button to={site.cta.href} className="mt-2">
-                Request a seat
-              </Button>
+              <div className="mt-2 flex flex-wrap items-center gap-4">
+                <Button to={site.cta.href}>Request a seat</Button>
+                <Button to={`/cercles/${event.slug}`} variant="ghost">
+                  More about this Cercle
+                </Button>
+              </div>
             </div>
           )
 

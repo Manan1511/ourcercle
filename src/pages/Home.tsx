@@ -154,6 +154,9 @@ export default function Home() {
                 <p className="text-lg leading-relaxed text-(--color-text-muted)">
                   {event.blurb}
                 </p>
+                <Button to={`/cercles/${event.slug}`} variant="ghost" className="mt-1">
+                  More about this Cercle
+                </Button>
               </div>
             </div>
           </Container>

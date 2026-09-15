@@ -61,8 +61,8 @@ export const events = [
       'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-card-2.jpg',
     imageAlt: 'A candlelit table reflected in a mirror, flowers and warm light',
     detailImage:
-      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-detail.jpg',
-    detailImageAlt: 'A box of individual tarts and small bites, hand reaching in',
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-detail-2.jpg',
+    detailImageAlt: 'Friends raising a toast together around a candlelit table',
   },
   {
     slug: 'palette-to-plate',

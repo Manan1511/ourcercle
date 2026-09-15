@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import AdminLayout from './components/admin/AdminLayout'
 import Home from './pages/Home'
 import Cercles from './pages/Cercles'
+import CercleDetail from './pages/CercleDetail'
 import Story from './pages/Story'
 import Journal from './pages/Journal'
 import Invite from './pages/Invite'
@@ -33,6 +34,12 @@ import AdminCercles from './pages/admin/Cercles'
  * route would hydrate on top of the wrong page. Not linked from the public
  * nav -- direct URL only, and every admin page renders <Seo noIndex />.
  *
+ * cercles/:slug IS a dynamic segment, unlike admin -- the difference is that
+ * every possible slug is already known at build time from the committed
+ * `events` content (see src/content/cercles.ts), so `includedRoutes` in
+ * vite.config.ts's `ssgOptions` enumerates one real prerendered path per
+ * event, the same as any other route here.
+ *
  * Each /admin/* path is its own literal top-level entry here rather than a
  * nested child of a shared layout route -- vite-react-ssg 0.9.2's static
  * path resolver loses the accumulated prefix when it walks a pathless
@@ -47,6 +54,7 @@ export const routes: RouteRecord[] = [
     children: [
       { index: true, element: <Home /> },
       { path: 'cercles', element: <Cercles /> },
+      { path: 'cercles/:slug', element: <CercleDetail /> },
       { path: 'journal', element: <Journal /> },
       { path: 'story', element: <Story /> },
       { path: 'invite', element: <Invite /> },
