@@ -12,6 +12,57 @@ export const events = [
       "Cocktails, a self-makeup masterclass with Mehwish Almas, and forty of London's most interesting women in one room.",
     imageLabel: '',
     detailImageLabel: '',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-card.jpg',
+    imageAlt: 'A round of cocktails raised together by candlelight',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/sip-and-glam-detail.jpg',
+    detailImageAlt: 'Coupe glasses clinked together over a candlelit table',
+  },
+  {
+    slug: 'chefs-table',
+    name: "Chef's Table",
+    status: 'upcoming',
+    blurb:
+      'One long table, one kitchen cooking in front of you, and a menu built for the conversation rather than the photograph.',
+    imageLabel: '',
+    detailImageLabel: '',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-upcoming-card.jpg',
+    imageAlt: 'A candlelit table set with colourful ceramics, guests seated nearby',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/chefs-table-upcoming-detail.jpg',
+    detailImageAlt: 'A group gathered around a candlelit table, mid-conversation',
+  },
+  {
+    slug: 'tipsy-table',
+    name: 'Tipsy Table',
+    status: 'upcoming',
+    blurb:
+      'A round of cocktails, a lighter question than usual, and a table that gets looser as the night goes on.',
+    imageLabel: '',
+    detailImageLabel: '',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-card-2.jpg',
+    imageAlt: 'A host arranging roses and candles at a table set with wine glasses',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/tipsy-table-detail-2.jpg',
+    detailImageAlt: 'A group gathered around a table decorated with roses and candles',
+  },
+  {
+    slug: 'indian-aperitivo',
+    name: 'Indian Apéritivo',
+    status: 'upcoming',
+    blurb:
+      'Spiced small plates, something sparkling, and the aperitivo hour reimagined with an Indian pantry.',
+    imageLabel: '',
+    detailImageLabel: '',
+    image:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-card-2.jpg',
+    imageAlt: 'A candlelit table reflected in a mirror, flowers and warm light',
+    detailImage:
+      'https://arudurkjypzknupueyyf.supabase.co/storage/v1/object/public/content-images/indian-aperitivo-detail.jpg',
+    detailImageAlt: 'A box of individual tarts and small bites, hand reaching in',
   },
   {
     slug: 'palette-to-plate',
