@@ -34,7 +34,7 @@ export const home: PageContent = {
   hero: {
     eyebrow: 'A social experiences community',
     heading: 'Step outside your usual circle.',
-    body: 'We create thoughtfully curated experiences that bring together people, perspectives and stories, from intimate Chef’s Tables to art, beauty and culture. Every Cercle is designed to put you in a room of people you may never have met otherwise.',
+    body: 'We create thoughtfully curated experiences that bring together people, perspectives and stories. Every Cercle is its own evening, not a repeating format, designed to put you in a room of people you may never have met otherwise.',
     cta: { label: 'Request an invite', href: '/invite' },
   },
 }

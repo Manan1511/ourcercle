@@ -1,23 +1,8 @@
 import type { CSSProperties } from 'react'
-import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
-import {
-  cerclesMeta,
-  eveningTimeline,
-  formats,
-  upcomingEvents,
-} from '../content/cercles'
+import { cerclesMeta, eveningTimeline, upcomingEvents } from '../content/cercles'
 import { site } from '../content/site'
-import {
-  Badge,
-  Button,
-  Card,
-  Container,
-  Eyebrow,
-  Heading,
-  ImageSlot,
-  Section,
-} from '../ui'
+import { Button, Container, Eyebrow, Heading, ImageSlot, Section } from '../ui'
 
 export default function Cercles() {
   return (
@@ -46,48 +31,63 @@ export default function Cercles() {
         </Container>
       </Section>
 
-      {/* Each format alternates image side and ground, echoing the design:
-          surface (bordered) / canvas / surface (bordered) / canvas. */}
-      {formats.map((format, i) => {
-        const imageFirst = i % 2 === 0
-        const image = (
-          <ImageSlot
-            key="image"
-            ratio="3 / 2"
-            src={format.detailImage}
-            alt={format.detailImageAlt}
-            label={format.detailImageLabel}
-          />
-        )
-        const copy = (
-          <div key="copy" className="flex flex-col items-start gap-4.5">
-            <Eyebrow>{format.number}</Eyebrow>
-            <Heading level={2} size="xl">
-              {format.name}
-            </Heading>
-            <p className="text-lg leading-relaxed text-(--color-text-muted)">
-              {format.description}
+      {/* Each event alternates image side and ground -- there's no fixed
+          format to key these off, just whatever's actually upcoming. */}
+      {upcomingEvents.length === 0 ? (
+        <Section tone="surface" bordered>
+          <Container data-reveal>
+            <p className="text-(--color-text-muted)">
+              Nothing on the calendar right now -- check back soon, or request an invite
+              and we'll let you know as soon as something's confirmed.
             </p>
-            <p className="text-[0.9375rem] text-(--color-text-subtle)">{format.meta}</p>
-          </div>
-        )
+          </Container>
+        </Section>
+      ) : (
+        upcomingEvents.map((event, i) => {
+          const imageFirst = i % 2 === 0
+          const image = (
+            <ImageSlot
+              key="image"
+              ratio="3 / 2"
+              src={event.detailImage ?? event.image}
+              alt={event.detailImageAlt ?? event.imageAlt}
+              label={event.detailImageLabel || event.imageLabel}
+            />
+          )
+          const copy = (
+            <div key="copy" className="flex flex-col items-start gap-4.5">
+              {event.kicker && <Eyebrow>{event.kicker}</Eyebrow>}
+              <Heading level={2} size="xl">
+                {event.name}
+              </Heading>
+              <p className="text-lg leading-relaxed text-(--color-text-muted)">
+                {event.description ?? event.blurb}
+              </p>
+              {event.meta && (
+                <p className="text-[0.9375rem] text-(--color-text-subtle)">
+                  {event.meta}
+                </p>
+              )}
+              <Button to={site.cta.href} className="mt-2">
+                Request a seat
+              </Button>
+            </div>
+          )
 
-        return (
-          <Section
-            key={format.slug}
-            id={format.slug}
-            tone={i % 2 === 0 ? 'surface' : 'canvas'}
-            bordered={i % 2 === 0}
-          >
-            <Container
-              data-reveal
-              className="grid items-center gap-14 lg:grid-cols-2"
+          return (
+            <Section
+              key={event.slug}
+              id={event.slug}
+              tone={i % 2 === 0 ? 'surface' : 'canvas'}
+              bordered={i % 2 === 0}
             >
-              {imageFirst ? [image, copy] : [copy, image]}
-            </Container>
-          </Section>
-        )
-      })}
+              <Container data-reveal className="grid items-center gap-14 lg:grid-cols-2">
+                {imageFirst ? [image, copy] : [copy, image]}
+              </Container>
+            </Section>
+          )
+        })
+      )}
 
       {/* Cream ground: Section supplies the on-alt text roles for the eyebrow,
           the timeline body copy and the dividers below. */}
@@ -114,60 +114,6 @@ export default function Cercles() {
                 <p className="text-[0.9375rem] leading-relaxed text-(--color-text-muted)">
                   {beat.text}
                 </p>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
-      <Section tone="canvas">
-        <Container>
-          <div
-            data-reveal
-            className="flex flex-wrap items-end justify-between gap-6"
-          >
-            <div className="flex flex-col gap-4">
-              <Eyebrow>{cerclesMeta.upcoming.eyebrow}</Eyebrow>
-              <Heading level={2} size="xl">
-                {cerclesMeta.upcoming.heading}
-              </Heading>
-            </div>
-            {/* Remove once the calendar below reflects real, bookable dates. */}
-            <Badge>{cerclesMeta.upcoming.badge}</Badge>
-          </div>
-
-          <ul className="mt-12 grid list-none grid-cols-[repeat(auto-fit,minmax(17.5rem,1fr))] gap-7">
-            {upcomingEvents.map((event, i) => (
-              <li
-                key={event.slug}
-                data-reveal
-                style={{ '--reveal-delay': `${i * 90}ms` } as CSSProperties}
-              >
-                <Card tone="cream" className="flex h-full flex-col gap-3.5">
-                  <p className="text-[0.8125rem] tracking-[0.14em] uppercase text-(--color-text-subtle)">
-                    {event.kicker}
-                  </p>
-                  <Heading level={3} size="md">
-                    {event.title}
-                  </Heading>
-                  <p className="text-[0.9375rem] leading-relaxed text-(--color-text-muted)">
-                    {event.blurb}
-                  </p>
-                  {/* A lighter link, not the page's Button -- these cards sit
-                      one level below the closing CTA in the design's hierarchy. */}
-                  <Link
-                    to={site.cta.href}
-                    className="group mt-auto inline-flex items-center gap-1 text-sm text-(--color-link) transition-colors duration-(--duration-base) hover:text-(--color-on-primary)"
-                  >
-                    Request a seat
-                    <span
-                      aria-hidden="true"
-                      className="inline-block transition-transform duration-(--duration-base) ease-(--ease-out-soft) group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </Link>
-                </Card>
               </li>
             ))}
           </ul>

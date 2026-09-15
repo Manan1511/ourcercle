@@ -46,7 +46,7 @@ export const site: SiteConfig = {
   ogImage: '/og-default.png',
   tagline: 'Thoughtfully curated experiences for real human connection.',
   nav: [
-    { label: 'The Cercles', href: '/cercles' },
+    { label: 'Upcoming Cercles', href: '/cercles' },
     { label: 'Journal', href: '/journal' },
     { label: 'Our story', href: '/story' },
   ],

@@ -93,14 +93,14 @@ const journal = await fetchTable('journal_entries', (row) => ({
 }))
 if (journal) writeModule('journal.ts', 'journal_entries', 'entries', journal)
 
-const formats = await fetchTable('cercle_formats', (row) => ({
+const events = await fetchTable('cercle_events', (row) => ({
   slug: row.slug,
-  number: row.number,
   name: row.name,
+  status: row.status,
+  ...(row.kicker ? { kicker: row.kicker } : {}),
   blurb: row.blurb,
-  description: row.description,
-  ...(row.seats ? { seats: row.seats } : {}),
-  meta: row.meta,
+  ...(row.description ? { description: row.description } : {}),
+  ...(row.meta ? { meta: row.meta } : {}),
   imageLabel: row.image_label ?? '',
   detailImageLabel: row.detail_image_label ?? '',
   ...(row.image_url ? { image: row.image_url } : {}),
@@ -108,12 +108,4 @@ const formats = await fetchTable('cercle_formats', (row) => ({
   ...(row.detail_image_url ? { detailImage: row.detail_image_url } : {}),
   ...(row.detail_image_alt ? { detailImageAlt: row.detail_image_alt } : {}),
 }))
-if (formats) writeModule('cercle-formats.ts', 'cercle_formats', 'formats', formats)
-
-const events = await fetchTable('upcoming_events', (row) => ({
-  slug: row.slug,
-  kicker: row.kicker,
-  title: row.title,
-  blurb: row.blurb,
-}))
-if (events) writeModule('upcoming-events.ts', 'upcoming_events', 'upcomingEvents', events)
+if (events) writeModule('cercle-events.ts', 'cercle_events', 'events', events)

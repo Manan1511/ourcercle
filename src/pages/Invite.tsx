@@ -30,10 +30,10 @@ export default function Invite() {
   // it open with the "no preference" option below).
   const eventOptions =
     upcomingEvents.length === 1
-      ? upcomingEvents.map((event) => ({ value: event.slug, label: event.title }))
+      ? upcomingEvents.map((event) => ({ value: event.slug, label: event.name }))
       : [
           { value: '', label: inviteForm.eventNoPreferenceLabel },
-          ...upcomingEvents.map((event) => ({ value: event.slug, label: event.title })),
+          ...upcomingEvents.map((event) => ({ value: event.slug, label: event.name })),
         ]
 
   const [status, setStatus] = useState<Status>('idle')

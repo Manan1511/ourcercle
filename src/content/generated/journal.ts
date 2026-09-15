@@ -5,7 +5,7 @@
 export const entries = [
   {
     slug: 'the-dish-nobody-could-name',
-    format: "Chef's Table",
+    format: 'Palette to Plate',
     title: 'The dish nobody could name',
     excerpt:
       "On the fourth course, the table stopped talking for the first time all night, and then didn't stop talking about it.",

@@ -4,7 +4,12 @@
  * supabase/migrations/ instead, so this never drifts from the real schema.
  */
 export type Json =
-  string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
 
 export type Database = {
   // Allows to automatically instantiate createClient with right options
@@ -14,11 +19,11 @@ export type Database = {
   }
   public: {
     Tables: {
-      cercle_formats: {
+      cercle_events: {
         Row: {
           blurb: string
           created_at: string
-          description: string
+          description: string | null
           detail_image_alt: string | null
           detail_image_label: string | null
           detail_image_url: string | null
@@ -27,18 +32,18 @@ export type Database = {
           image_alt: string | null
           image_label: string | null
           image_url: string | null
-          meta: string
+          kicker: string | null
+          meta: string | null
           name: string
-          number: string
-          seats: string | null
           slug: string
           sort_order: number
+          status: string
           updated_at: string
         }
         Insert: {
           blurb: string
           created_at?: string
-          description: string
+          description?: string | null
           detail_image_alt?: string | null
           detail_image_label?: string | null
           detail_image_url?: string | null
@@ -47,18 +52,18 @@ export type Database = {
           image_alt?: string | null
           image_label?: string | null
           image_url?: string | null
-          meta: string
+          kicker?: string | null
+          meta?: string | null
           name: string
-          number: string
-          seats?: string | null
           slug: string
           sort_order?: number
+          status: string
           updated_at?: string
         }
         Update: {
           blurb?: string
           created_at?: string
-          description?: string
+          description?: string | null
           detail_image_alt?: string | null
           detail_image_label?: string | null
           detail_image_url?: string | null
@@ -67,12 +72,12 @@ export type Database = {
           image_alt?: string | null
           image_label?: string | null
           image_url?: string | null
-          meta?: string
+          kicker?: string | null
+          meta?: string | null
           name?: string
-          number?: string
-          seats?: string | null
           slug?: string
           sort_order?: number
+          status?: string
           updated_at?: string
         }
         Relationships: []
@@ -158,42 +163,6 @@ export type Database = {
         }
         Relationships: []
       }
-      upcoming_events: {
-        Row: {
-          blurb: string
-          created_at: string
-          draft: boolean
-          id: string
-          kicker: string
-          slug: string
-          sort_order: number
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          blurb: string
-          created_at?: string
-          draft?: boolean
-          id?: string
-          kicker: string
-          slug: string
-          sort_order?: number
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          blurb?: string
-          created_at?: string
-          draft?: boolean
-          id?: string
-          kicker?: string
-          slug?: string
-          sort_order?: number
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
     }
     Views: {
       [_ in never]: never
@@ -245,7 +214,8 @@ export type Tables<
 
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
-    keyof DefaultSchema['Tables'] | { schema: keyof DatabaseWithoutInternals },
+    | keyof DefaultSchema['Tables']
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
@@ -269,7 +239,8 @@ export type TablesInsert<
 
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
-    keyof DefaultSchema['Tables'] | { schema: keyof DatabaseWithoutInternals },
+    | keyof DefaultSchema['Tables']
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }

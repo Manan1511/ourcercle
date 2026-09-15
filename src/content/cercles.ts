@@ -1,49 +1,48 @@
 /**
- * The Cercle formats.
+ * Cercle events.
  *
- * `formats` and `upcomingEvents` are sourced from Supabase (`cercle_formats`
- * and `upcoming_events` -- see the admin panel at /admin/cercles), fetched at
- * build time by scripts/fetch-content.mjs into
- * src/content/generated/cercle-formats.ts and upcoming-events.ts -- edit
- * content there (via the admin panel), not here.
+ * There are no fixed, recurring "formats" -- every Cercle is a one-off event
+ * with its own name. `events` is sourced from Supabase's `cercle_events`
+ * table (see the admin panel at /admin/cercles), fetched at build time by
+ * scripts/fetch-content.mjs into src/content/generated/cercle-events.ts --
+ * edit content there (via the admin panel), not here.
  *
- * `blurb` is the short homepage-card version; `description` is the longer
- * paragraph used on /cercles. `imageLabel` / `detailImageLabel` are the
- * photography briefs shown in the empty slots at each size, so the shot list
- * stays legible from the site itself while the assets are outstanding.
+ * `blurb` is the short card version; `description` is the longer paragraph
+ * used on the /cercles ("Upcoming Cercles") detail sections -- only past
+ * events reliably have one, since an upcoming event may be announced before
+ * there's much more to say than its name. `imageLabel` / `detailImageLabel`
+ * are the photography briefs shown in the empty slots at each size.
  */
-import { formats as generatedFormats } from './generated/cercle-formats'
-import { upcomingEvents as generatedUpcomingEvents } from './generated/upcoming-events'
+import { events as generatedEvents } from './generated/cercle-events'
 
-export interface CercleFormat {
+export interface CercleEvent {
   slug: string
-  /** "No. 1".."No. 4" -- the /cercles page numbers each format. */
-  number: string
   name: string
+  status: 'past' | 'upcoming'
+  /** e.g. "Chef Prabhraj Singh · First Gathering". Shown as the card kicker. */
+  kicker?: string
   blurb: string
-  description: string
-  /**
-   * Short capacity badge, e.g. "8-12 seats", on the homepage card. Only
-   * Sip & Glam London shows one -- the others deliberately omit capacity, so
-   * this is optional and the card leaves the line out when absent.
-   */
-  seats?: string
-  /** Full detail line, e.g. "one evening · dietary needs asked for in advance". Shown on /cercles. */
-  meta: string
+  description?: string
+  /** Extra detail line, e.g. host or format notes. */
+  meta?: string
   imageLabel: string
   detailImageLabel: string
-  /** Path under /public once the photographs land. */
+  /** Path under /public, or a Supabase Storage URL, once the photographs land. */
   image?: string
   imageAlt?: string
   detailImage?: string
   detailImageAlt?: string
 }
 
-export const formats: CercleFormat[] = generatedFormats
+// The generated module's `status` field is a plain string (JSON has no
+// literal-union concept); the DB's check constraint guarantees it's only
+// ever 'past' or 'upcoming', so this cast is safe.
+export const events: CercleEvent[] = generatedEvents as CercleEvent[]
 
-/** Homepage hero photography. Not part of the admin-managed content tables
- *  (it's a single site-wide image, not a repeatable list) -- swap by editing
- *  this object directly. */
+export const pastEvents = events.filter((event) => event.status === 'past')
+export const upcomingEvents = events.filter((event) => event.status === 'upcoming')
+
+/** Photography brief for the homepage hero. */
 export const heroImage = {
   label: 'Candlelit table mid-conversation (4:5)',
   ratio: '4 / 5',
@@ -51,15 +50,16 @@ export const heroImage = {
   alt: 'Guests raising a toast around a candlelit Cercle dinner table',
 }
 
-/** Copy for /cercles outside of the per-format sections. */
+/** Copy for /cercles, now "Upcoming Cercles" -- what's coming up, not a
+ *  catalogue of fixed formats. */
 export const cerclesMeta = {
-  title: 'The Cercles',
+  title: 'Upcoming Cercles',
   description:
-    'The four formats OurCercle gathers around: the Chef’s Table, Sip & Glam London, the Tipsy Table and Indian Apéritivo.',
-  eyebrow: 'The Cercles',
-  heading: 'Four rooms. One intention.',
+    'What OurCercle has coming up -- each gathering is its own event, not a repeating format.',
+  eyebrow: 'Upcoming Cercles',
+  heading: "What's next.",
   intro:
-    'Every Cercle is curated so the room itself is the experience -- most nights eight to fourteen seats, occasionally a bigger room built the same way. The format just sets the table.',
+    'Every Cercle is its own evening, built around whoever is hosting and whatever the room calls for -- not a repeating format. Here is what is coming up.',
   evening: {
     eyebrow: 'How it feels',
     heading: 'An evening, roughly.',
@@ -70,7 +70,7 @@ export const cerclesMeta = {
     badge: 'Illustrative, programme TBC',
   },
   cta: {
-    heading: 'Pick a room. We’ll pick the people.',
+    heading: 'Come as you are. We’ll handle the rest.',
   },
 }
 
@@ -89,13 +89,3 @@ export const eveningTimeline: EveningBeat[] = [
     text: 'Numbers exchanged on the pavement. That part isn’t curated.',
   },
 ]
-
-export interface UpcomingEvent {
-  slug: string
-  /** e.g. "Chef's Table · October" -- shown as the card kicker. */
-  kicker: string
-  title: string
-  blurb: string
-}
-
-export const upcomingEvents: UpcomingEvent[] = generatedUpcomingEvents
